@@ -10,15 +10,15 @@ import Combine
 import CoreData
 
 class CoreDataManager: NSObject {
-    
-//    static let shared = CoreDataManager()
-    
+        
     var completion: (([Task_CD]) ->  Void)?
     var lastSynchDate = Date()
-//    let timeSyncSubject = PassthroughSubject<String, Never>()
+    var timerPublisher: AnyPublisher<String?, Never>?
     
-    // MARK: - Core Data stack
-    lazy var persistentContainer: NSPersistentCloudKitContainer = {
+    private var fetchedResultsController: NSFetchedResultsController<Task_CD>?
+    private var previousDate = Date()
+    
+    private lazy var persistentContainer: NSPersistentCloudKitContainer = {
         let container = NSPersistentCloudKitContainer(name: "Model")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -28,20 +28,17 @@ class CoreDataManager: NSObject {
         return container
     }()
     
-    var managedContext: NSManagedObjectContext {
+    private var managedContext: NSManagedObjectContext {
         let context = persistentContainer.viewContext
-
-//        let context = CoreDataManager.shared.persistentContainer.viewContext
         context.automaticallyMergesChangesFromParent = true
         return context
     }
 
     // MARK: - Core Data Saving support
     func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
+        if managedContext.hasChanges {
             do {
-                try context.save()
+                try managedContext.save()
             } catch {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
@@ -49,9 +46,7 @@ class CoreDataManager: NSObject {
         }
     }
     
-    
-    var timerPublisher: AnyPublisher<String?, Never>?
-    var fetchedResultsController: NSFetchedResultsController<Task_CD>?
+
 
     func setFetchedResultsController() {
         let fetch = NSFetchRequest<Task_CD>(entityName: "Task_CD")
@@ -68,7 +63,6 @@ class CoreDataManager: NSObject {
             .autoconnect()
             .map { [weak self] _ in self?.getTime() }
             .eraseToAnyPublisher()
-        // wartosc roznicymiedzy data .now a data sunchronizacji
     }
     
     private func fetchData() {
@@ -78,9 +72,7 @@ class CoreDataManager: NSObject {
             print("Error fetching products")
         }
     }
-    
-    private var previousDate = Date()
-    
+        
     private func getTime() -> String {
         let diffComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: lastSynchDate, to: Date())
         let hours = String(diffComponents.hour ?? 0)
@@ -94,24 +86,9 @@ class CoreDataManager: NSObject {
 
 extension CoreDataManager: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-
-        print("filter ---> controllerDidChangeContent")
-
-        fetchedResultsController?.fetchedObjects?.forEach { t in
-            print("filter       task: \(t.name)")
-
-        }
         let tasks = fetchedResultsController?.fetchedObjects ?? []
         self.completion?(tasks)
         lastSynchDate = Date()
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                    didChange anObject: Any,
-                    at indexPath: IndexPath?,
-                    for type: NSFetchedResultsChangeType,
-                    newIndexPath: IndexPath?) {
-        print("filter >>>>> controllerDidChangeContent")
     }
     
 }
