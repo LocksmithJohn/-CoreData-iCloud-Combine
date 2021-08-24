@@ -10,7 +10,7 @@ import SwiftUI
 struct MiddleBarScreen: View {
     
     @EnvironmentObject var container: Container
-    @EnvironmentObject var router: Router
+    @EnvironmentObject var router: IOSRouter
     
     @State private var tasksNames: [String] = []
     @State private var projectsNames: [String] = []
@@ -55,13 +55,14 @@ struct MiddleBarScreen: View {
                         router.type = .tasks(.initial) // tutaj scentralizować to
                     }, label: "Add Task")
                     MacButton(action: {
-                        container.taskInteractor.deleteTasks()
+                        container.tasksInteractor.deleteTasks()
                     }, label: "Delete All")
                     }
 
                 case .projects:
                     MacButton(action: {
-                        router.type = .projects(.details)
+                        container.projectsInteractor.add(project: Project(name: "projekt", description: "szczegoy", tasks: []))
+//                        router.type = .projects(.details)
                     }, label: "Add Project")
                 default:
                     MacButton(action: {

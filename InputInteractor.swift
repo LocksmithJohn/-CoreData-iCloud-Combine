@@ -20,7 +20,7 @@ class InputInteractor: InputInteractorProtocol {
     }
 
     func add(input: Input) {
-        appState.addInput(input)
+//        appState.addInput(input)
     }
 
 }

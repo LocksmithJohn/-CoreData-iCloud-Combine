@@ -9,26 +9,32 @@ import Combine
 import SwiftUI
 import UIKit
 
-protocol MyView: View {
-    var type: SType { get set }
-}
-
-struct TasksScreen: MyView {
+struct TasksScreen: IOSScreen {
     
     var type = SType.tasks
     
-//    @EnvironmentObject var router: Router
-    @EnvironmentObject var container: Container
-    
     @State private var tasksNames: [String] = []
     @State private var newTask: String = ""
-    @State private var date: String = ""
+    @State private var date: String?
     
     private var bag = Set<AnyCancellable>()
+    private let appState: TasksAppState
+    private let interactor: TasksInteractor
+    private let router: IOSRouter
+    
+    init(interactor: TasksInteractor,
+         appState: TasksAppState,
+         router: IOSRouter) {
+        self.interactor = interactor
+        self.appState = appState
+        self.router = router
+    }
     
     var body: some View {
         VStack {
-            Text(date).padding()
+            if let date = date {
+                Text(date).padding()
+            }
             List {
                 ForEach(tasksNames, id: \.self) { task in
                     Text(task)
@@ -38,11 +44,11 @@ struct TasksScreen: MyView {
                 .textFieldStyle(CustomTextfieldStyle())
             Button {
                 let task = Task(name: newTask, description: "subtitle", parentProject: "nil")
-                container.taskInteractor.add(task: task)
+                interactor.add(task: task)
             } label: {
                 Text("Add Task")
             }.buttonStyle(CustomButtonStyle(color: .green))
-            Button { container.taskInteractor.deleteTasks() } label: {
+            Button { interactor.deleteTasks() } label: {
                 
                 Text("Delete All")
             }
@@ -50,17 +56,17 @@ struct TasksScreen: MyView {
             .padding(.bottom, 16)
         }
         .modifier(NavigationBarModifier(type.title))
-        .onReceive(tasksPublisher, perform: { tasksNames = $0.map { $0.name ?? "-" } } )
+        .onReceive(tasksPublisher, perform: { tasksNames = $0.map { $0.name } } )
         .onReceive(datePublisher, perform: { date = $0 })
     }
     
     private var tasksPublisher: AnyPublisher<[Task], Never> {
-        container.appState.tasksSubject
+        appState.tasksSubject
             .eraseToAnyPublisher()
     }
-    
-    private var datePublisher: AnyPublisher<String, Never> {
-        container.appState.syncTimeSubject
+
+    private var datePublisher: MyAnyPublisher<String?> {
+        appState.syncTimeSubject
             .eraseToAnyPublisher()
     }
     

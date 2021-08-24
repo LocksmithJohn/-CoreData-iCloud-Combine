@@ -7,16 +7,25 @@
 
 import SwiftUI
 
-struct InboxScreen: MyView {
+struct InboxScreen: IOSScreen {
     var type = SType.inbox
     
-    @EnvironmentObject var router: Router
-    @EnvironmentObject var container: Container
+    private let appState: InputsAppState
+    private let interactor: InputInteractor
+    private let router: IOSRouter
+    
+    init(interactor: InputInteractor,
+         appState: InputsAppState,
+         router: IOSRouter) {
+        self.interactor = interactor
+        self.appState = appState
+        self.router = router
+    }
 
     var body: some View {
         VStack {
             Button {
-                container.routerInbox.route(from: type)
+                router.route(from: type)
             } label: {
                 Text("Go to Input details")
             }.buttonStyle(CustomButtonStyle())

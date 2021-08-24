@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Task_CD" representedClassName="Task_CD" syncable="YES" codeGenerationType="class">
+    <entity name="Project_CD" representedClassName="Project_CD" isAbstract="YES" syncable="YES" codeGenerationType="category">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="projectDescription" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Task_CD" representedClassName="Task_CD" isAbstract="YES" syncable="YES" codeGenerationType="category">
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="taskDescription" optional="YES" attributeType="String"/>
     </entity>
     <elements>
+        <element name="Project_CD" positionX="-63" positionY="0" width="128" height="59"/>
         <element name="Task_CD" positionX="-63" positionY="-18" width="128" height="59"/>
     </elements>
 </model>

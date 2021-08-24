@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TaskDetailsScreen: MyView {
+struct TaskDetailsScreen: IOSScreen {
     var type = SType.taskDetails
     
     @EnvironmentObject var container: Container

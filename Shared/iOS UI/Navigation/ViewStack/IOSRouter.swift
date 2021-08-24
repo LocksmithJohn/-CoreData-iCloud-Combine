@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Router: ObservableObject {
+class IOSRouter: ObservableObject {
     
     @Published private (set) var screens: [Screen] = [] {
         didSet { printStactInfo() }

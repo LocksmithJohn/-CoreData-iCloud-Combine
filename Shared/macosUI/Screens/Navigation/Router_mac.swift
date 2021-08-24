@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Router: ObservableObject {
+class IOSRouter: ObservableObject {
     
     @Published var type: MiddleType = .tasks(.initial) {
         didSet {

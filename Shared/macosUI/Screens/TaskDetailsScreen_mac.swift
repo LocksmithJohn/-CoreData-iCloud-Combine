@@ -45,7 +45,7 @@ struct TaskDetailsScreen_mac: View {
                 }
             }
         MacButton(action: {
-            container.taskInteractor.add(task: Task(name: taskName, description: taskDescription, parentProject: ""))
+            container.tasksInteractor.add(task: Task(name: taskName, description: taskDescription, parentProject: ""))
         }, label: "Create")
                 
         }

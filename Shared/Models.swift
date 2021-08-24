@@ -19,6 +19,14 @@ struct Task: Equatable {
     var parentProject: String = ""
 }
 
+extension Project {
+    init(_ project_cd: Project_CD) {
+        name = project_cd.name ?? ""
+        description = project_cd.projectDescription
+        tasks = []
+    }
+}
+
 extension Task {
     init(_ task_cd: Task_CD) {
         name = task_cd.name ?? ""

@@ -8,12 +8,23 @@
 import Combine
 import SwiftUI
 
-struct ProjectsScreen: MyView {
+struct ProjectsScreen: IOSScreen {
+    
     var type = SType.projects
+        
+    @State private var projectsNames = [String]()
     
-    @EnvironmentObject var container: Container
+    private let appState: ProjectsAppState
+    private let interactor: ProjectsInteractor
+    private let router: IOSRouter
     
-    @State var projectsNames = [String]()
+    init(interactor: ProjectsInteractor,
+         appState: ProjectsAppState,
+         router: IOSRouter) {
+        self.interactor = interactor
+        self.appState = appState
+        self.router = router
+    }
     
     var body: some View {
         VStack {
@@ -22,10 +33,13 @@ struct ProjectsScreen: MyView {
                     Text(task)
                 }
             }
-            Button(action: { container.projectsInteractor.add(project: Project(name: "project", description: "project desc", tasks: [Task(name: "task in project", parentProject: "")]) ) },
+            Button(action: {
+                    interactor.add(project: Project(name: "project", description: "project desc", tasks: [Task(name: "task in project", parentProject: "")]) )
+                
+            },
                    label: { Text("Add project") } )
                 .buttonStyle(CustomButtonStyle(color: .green))
-            Button(action: { container.routerProjects.route(from: type) },
+            Button(action: { router.route(from: type) },
                    label: { Text("Project details") } )
                 .buttonStyle(CustomButtonStyle())
                 .padding(.bottom, 16)
@@ -35,8 +49,7 @@ struct ProjectsScreen: MyView {
     }
     
     private var projectsPublisher: AnyPublisher<[Project], Never> {
-        container.appState.projectsSubject
-            .eraseToAnyPublisher()
+        appState.projectsSubject.eraseToAnyPublisher()
     }
 }
 

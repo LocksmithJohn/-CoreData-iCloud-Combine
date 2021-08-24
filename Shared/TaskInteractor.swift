@@ -5,11 +5,13 @@
 //  Created by User on 03/08/2021.
 //
 
+import Combine
+
 protocol TasksInteractorProtocol {
     func add(task: Task)
 }
 
-class TasksInteractor: TasksInteractorProtocol {
+class TasksInteractor: TasksInteractorProtocol, ObservableObject {
     
     var appState: AppState // tutaj powinien wjechac tylko cześć apstatea
     

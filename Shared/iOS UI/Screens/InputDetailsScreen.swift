@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InputDetailsScreen: MyView {
+struct InputDetailsScreen: IOSScreen {
     
     @EnvironmentObject var container: Container
     var type = SType.inputDetails

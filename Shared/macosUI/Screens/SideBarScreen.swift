@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SideBarScreen: View {
     
-    @EnvironmentObject var router: Router
+    @EnvironmentObject var router: IOSRouter
     
     var body: some View {
         List {

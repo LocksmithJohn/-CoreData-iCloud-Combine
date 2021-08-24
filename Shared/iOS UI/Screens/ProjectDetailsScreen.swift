@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProjectDetailsScreen: MyView {
+struct ProjectDetailsScreen: IOSScreen {
     
     @EnvironmentObject var container: Container
 

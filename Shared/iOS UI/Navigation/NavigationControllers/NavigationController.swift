@@ -15,7 +15,7 @@ protocol NavigationController: UIViewControllerRepresentable {
     func makeCoordinator() -> NavigationStackCoordinator
     func snapShotStackView(navigationController: UINavigationController,
                            container: Container,
-                           router: Router)
+                           router: IOSRouter)
     func setInitialView()
     
 }
@@ -35,7 +35,7 @@ extension NavigationController {
         NavigationStackCoordinator()
     }
     
-    func snapShotStackView(navigationController: UINavigationController, container: Container, router: Router) {
+    func snapShotStackView(navigationController: UINavigationController, container: Container, router: IOSRouter) {
         let presentedViewControllers = navigationController.viewControllers
         let newViewControllers = router.screens
             .filter { !$0.isModal }

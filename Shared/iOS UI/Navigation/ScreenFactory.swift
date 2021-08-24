@@ -12,11 +12,17 @@ struct ScreenFactory {
     static func make(type: SType, container: Container) -> AnyView {
         switch type {
         case .tasks:
-            return AnyView(TasksScreen().environmentObject(container))
+            return AnyView(TasksScreen(interactor: container.tasksInteractor,
+                                       appState: container.appState,
+                                       router: container.routerTasks))
         case .projects:
-            return AnyView(ProjectsScreen().environmentObject(container))
+            return AnyView(ProjectsScreen(interactor: container.projectsInteractor,
+                                          appState: container.appState,
+                                          router: container.routerProjects))
         case .inbox:
-            return AnyView(InboxScreen().environmentObject(container))
+            return AnyView(InboxScreen(interactor: container.inputsInteractor,
+                                       appState: container.appState,
+                                       router: container.routerInbox))
         case .taskDetails:
             return AnyView(TaskDetailsScreen().environmentObject(container))
         case .projectDetails:

@@ -17,5 +17,8 @@ struct MacView: View {
             MiddleBarScreen().environmentObject(container.router)
             CanvasScreen().environmentObject(container.router)
         }
+        .toolbar {
+            ToolbarView().environmentObject(container)
+        }
     }
 }

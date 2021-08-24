@@ -10,7 +10,7 @@ import SwiftUI
 struct CanvasScreen: View {
     
     @EnvironmentObject var container: Container
-    @EnvironmentObject var router: Router
+    @EnvironmentObject var router: IOSRouter
 
     var body: some View {
         VStack {
