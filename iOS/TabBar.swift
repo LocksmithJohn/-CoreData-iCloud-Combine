@@ -17,22 +17,29 @@ struct TabBar: View {
                 .environmentObject(container)
                 .tabItem {
                     Image(systemName: "1.circle")
+                        .accessibilityIdentifier("tab inbox")
+
                     Text("Inbox")
-                }.tag(1)
+                }
+                .tag(1)
             TasksNavigationController()
                 .environmentObject(container)
                 .environmentObject(container.routerTasks)
                 .tabItem {
                     Image(systemName: "2.circle")
+                        .accessibilityIdentifier("tab tasks")
                     Text("Tasks")
-                }.tag(2)
-                
+                }
+                .tag(2)
             ProjectsNavigationController()
                 .environmentObject(container)
                 .tabItem {
                     Image(systemName: "3.circle")
+                        .accessibilityIdentifier("tab projects")
+
                     Text("Projects")
-                }.tag(1)
+                }
+                .tag(3)
         }
         .accentColor(.white)
 

@@ -21,6 +21,7 @@ struct NavigationBar: View {
     let rightButtonImage: Image?
     let rightButtonAction: (() -> Void)?
     let mainColor: Color
+    let accessibilityIdentifier: String
     
     var body: some View {
         ZStack {
@@ -28,6 +29,7 @@ struct NavigationBar: View {
                 Text(title)
                     .foregroundColor(mainColor)
                     .padding()
+                    .accessibilityIdentifier(accessibilityIdentifier)
             }
             HStack {
                 if let leftButtonImage = leftButtonImage {

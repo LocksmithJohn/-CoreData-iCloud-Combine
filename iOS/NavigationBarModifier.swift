@@ -16,6 +16,7 @@ struct NavigationBarModifier: ViewModifier {
     let rightButtonAction: (() -> Void)?
     let syncDate: Binding<String?>?
     let mainColor: Color
+    let accessibilityIdentifier: String
     
     init(_ title: String? = nil,
          leftButtonImage: Image? = nil,
@@ -23,7 +24,8 @@ struct NavigationBarModifier: ViewModifier {
          rightButtonImage: Image? = nil,
          rightButtonAction: (() -> Void)? = nil,
          syncDate: Binding<String?>? = nil,
-         mainColor: Color = .white) {
+         mainColor: Color = .white,
+         accessibilityIdentifier: String) {
         self.title = title
         self.leftButtonImage = leftButtonImage
         self.leftButtonAction = leftButtonAction
@@ -31,6 +33,7 @@ struct NavigationBarModifier: ViewModifier {
         self.rightButtonAction = rightButtonAction
         self.syncDate = syncDate
         self.mainColor = mainColor
+        self.accessibilityIdentifier = accessibilityIdentifier
     }
     
     func body(content: Content) -> some View {
@@ -41,7 +44,8 @@ struct NavigationBarModifier: ViewModifier {
                           leftButtonAction: leftButtonAction,
                           rightButtonImage: rightButtonImage,
                           rightButtonAction: rightButtonAction,
-                          mainColor: mainColor)
+                          mainColor: mainColor,
+                          accessibilityIdentifier: accessibilityIdentifier)
             Spacer()
             content
                 .navigationBarBackButtonHidden(true)

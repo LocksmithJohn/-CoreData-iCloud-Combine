@@ -22,9 +22,10 @@ struct IOS_InputDetailsScreen: IOSScreen {
         .ignoresSafeArea()
         
         .modifier(NavigationBarModifier(type.title,
-                                         leftButtonImage: Image(systemName: "arrowshape.turn.up.backward"),
-                                         leftButtonAction: { container.routerInbox.pop() },
-                                         mainColor: .inboxColor))
+                                        leftButtonImage: Image(systemName: "arrowshape.turn.up.backward"),
+                                        leftButtonAction: { container.routerInbox.pop() },
+                                        mainColor: .inboxColor,
+                                        accessibilityIdentifier: Identifier.screenTitleInbox))
     }
 }
 

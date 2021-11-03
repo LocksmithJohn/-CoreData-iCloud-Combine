@@ -57,7 +57,9 @@ struct IOS_ProjectsScreen: IOSScreen {
             }
         }
         .padding()
-        .modifier(NavigationBarModifier(type.title, mainColor: .projectColor))
+        .modifier(NavigationBarModifier(type.title,
+                                        mainColor: .projectColor,
+                                        accessibilityIdentifier: Identifier.screenTitleProjects))
         .onReceive(projectsPublisher) {
             projects = $0
         }

@@ -31,6 +31,8 @@ struct IOS_InboxScreen: IOSScreen {
             }.buttonStyle(FilledButtonStyle(color: .yellow))
             .padding()
         }
-        .modifier(NavigationBarModifier(type.title, mainColor: .inboxColor))
+        .modifier(NavigationBarModifier(type.title,
+                                        mainColor: .inboxColor,
+                                        accessibilityIdentifier: Identifier.screenTitleInbox))
     }
 }

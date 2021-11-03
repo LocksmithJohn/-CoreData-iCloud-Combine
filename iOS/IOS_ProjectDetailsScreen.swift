@@ -86,7 +86,8 @@ struct IOS_ProjectDetailsScreen: IOSScreen {
         .modifier(NavigationBarModifier(type.title,
                                         leftButtonImage: Image(systemName: "arrowshape.turn.up.backward"),
                                         leftButtonAction: { router.pop() },
-                                        mainColor: .projectColor))
+                                        mainColor: .projectColor,
+                                        accessibilityIdentifier: Identifier.screenTitleProjectDetails))
         .onAppear { fillInData() }
     }
     

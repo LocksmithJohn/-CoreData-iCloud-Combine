@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "0F6B9090-4D5D-40DB-9839-E7C2F04D74FB",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Trening_icloud3.xcodeproj",
+        "identifier" : "CEEB8FA82732881600F4E36A",
+        "name" : "UITests"
+      }
+    }
+  ],
+  "version" : 1
+}
