@@ -20,7 +20,7 @@ class UITestsBasicNavigation: XCTestCase {
     func testScreensOnTabs() {
         UITestsTabbarProvider(app: app)
             .tapInboxTab()
-            .checkInboxScreenExistance()
+            .checkTasksScreenExistance()
             .tapTasksTab()
             .checkTasksScreenExistance()
             .tapProjectsTab()
