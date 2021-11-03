@@ -39,9 +39,7 @@ struct UITestsTabbarProvider: UITestProviderProtocol {
 
     @discardableResult
     func checkInboxScreenExistance() -> Self {
-        let title = app.staticTexts["screenTitleInbox"]
-        XCTAssertTrue(title.waitForExistence(timeout: 3))
-        return self
+        checkForExtistance(elementType: .staticText, identifier: .screenTitleInbox)
     }
 
     @discardableResult
@@ -51,9 +49,7 @@ struct UITestsTabbarProvider: UITestProviderProtocol {
 
     @discardableResult
     func checkProjectsScreenExistance() -> Self {
-        let title = app.staticTexts["screenTitleProjects"]
-        XCTAssertTrue(title.waitForExistence(timeout: 3))
-        return self
+        checkForExtistance(elementType: .staticText, identifier: .screenTitleProjects)
     }
 
     func checkForExtistance(elementType: UIElementType,
