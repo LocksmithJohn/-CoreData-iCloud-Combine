@@ -30,7 +30,8 @@ struct TabBar: View {
                     Text("Tasks")
                 }
                 .tag(2)
-            ProjectsNavigationController()
+//            ProjectsNavigationController()
+            Text("wrong screen")
                 .environmentObject(container)
                 .tabItem {
                     Image(systemName: "3.circle")
