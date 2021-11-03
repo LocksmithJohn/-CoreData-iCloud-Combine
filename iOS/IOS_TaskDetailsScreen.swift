@@ -18,6 +18,6 @@ struct IOS_TaskDetailsScreen: IOSScreen {
         }.modifier(NavigationBarModifier(type.title,
                                          leftButtonImage: Image(systemName: "arrowshape.turn.up.backward"),
                                          leftButtonAction: { container.routerTasks.pop() },
-                                         accessibilityIdentifier: Identifier.screenTitleTaskDetails))
+                                         identifier: .screenTitleTaskDetails))
     }
 }

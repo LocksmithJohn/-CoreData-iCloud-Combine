@@ -7,17 +7,42 @@
 
 import Foundation
 
-enum Identifier {
+enum Identifier: String {
 
-    static let screenTitleInbox = "screenTitleInbox"
-    static let screenTitleTasks = "screenTitleTasks"
-    static let screenTitleProjects = "screenTitleProjects"
-    static let screenTitleInboxDetails = "screenTitleInboxDetails"
-    static let screenTitleTaskDetails = "screenTitleTaskDetailsDetails"
-    static let screenTitleProjectDetails = "screenTitleProjectDetails"
+    // MARK: - Screen titles
+    case screenTitleInbox = "screenTitleInbox"
+    case screenTitleTasks = "screenTitleTasks"
+    case screenTitleProjects = "screenTitleProjects"
+    case screenTitleInboxDetails = "screenTitleInboxDetails"
+    case screenTitleTaskDetails = "screenTitleTaskDetailsDetails"
+    case screenTitleProjectDetails = "screenTitleProjectDetails"
 
-    static let tabBarTabInbox = "tabBarTabInbox"
-    static let tabBarTabTasks = "tabBarTabTasks"
-    static let tabBarTabProjects = "tabBarTabProjects"
+    // MARK: - Tabbar
+    case tabBarTabInbox = "tabBarTabInbox"
+    case tabBarTabTasks = "tabBarTabTasks"
+    case tabBarTabProjects = "tabBarTabProjects"
+
+    var assertMessage: String {
+        switch self {
+        case .screenTitleTasks:
+            return "Missing Tasks screen"
+        case .screenTitleInbox:
+            return "Missing Inbox screen"
+        case .screenTitleProjects:
+            return "Missing Projects screen"
+        case .screenTitleInboxDetails:
+            return "Missing Inbox Details screen"
+        case .screenTitleTaskDetails:
+            return "Missing Task Details screen"
+        case .screenTitleProjectDetails:
+            return "Missing Project Details screen"
+        case .tabBarTabInbox:
+            return "Missing Inbox Tab"
+        case .tabBarTabTasks:
+            return "Missing Tasks Tab"
+        case .tabBarTabProjects:
+            return "Missing Projects Tab"
+        }
+    }
 
 }

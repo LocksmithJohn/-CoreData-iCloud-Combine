@@ -65,7 +65,7 @@ class IOS_Router: ObservableObject {
     private func printStactInfo() {
         print("screen     ----Screens----")
         screens.reversed().forEach {
-            print("screen     |screen: \($0.type.title) \($0.isModal ? "is Modal" : "")")
+            print("screen     |screen: \(String(describing: $0.type.title)) \($0.isModal ? "is Modal" : "")")
         }
         print("screen     -----------------")
     }

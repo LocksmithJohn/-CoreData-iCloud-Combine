@@ -105,8 +105,6 @@
 		CED043C226C93CE200B7D003 /* MAC_Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED043BA26C93CE200B7D003 /* MAC_Button.swift */; };
 		CED349E726E6162A00D5E9EE /* TextFieldBig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED349E626E6162A00D5E9EE /* TextFieldBig.swift */; };
 		CED349E926E616F600D5E9EE /* TextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED349E826E616F600D5E9EE /* TextEditor.swift */; };
-		CEEB8FAC2732881600F4E36A /* UITests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB8FAB2732881600F4E36A /* UITests_iOS.swift */; };
-		CEEB8FAE2732881600F4E36A /* UITests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB8FAD2732881600F4E36A /* UITests_iOSLaunchTests.swift */; };
 		CEEB8FB62732928C00F4E36A /* UITestsBasicNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB8FB52732928C00F4E36A /* UITestsBasicNavigation.swift */; };
 		CEEB8FB8273293CE00F4E36A /* UITests_GlobalContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB8FB7273293CE00F4E36A /* UITests_GlobalContainer.swift */; };
 		CEEB8FBA2732961E00F4E36A /* UITestsTabbarProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB8FB92732961E00F4E36A /* UITestsTabbarProvider.swift */; };
@@ -114,6 +112,7 @@
 		CEEB8FBE273297B700F4E36A /* XCUIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB8FBD273297B700F4E36A /* XCUIApplication+Extensions.swift */; };
 		CEEB8FC227329B2B00F4E36A /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB8FC127329B2B00F4E36A /* AccessibilityIdentifiers.swift */; };
 		CEEB8FC327329B2B00F4E36A /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB8FC127329B2B00F4E36A /* AccessibilityIdentifiers.swift */; };
+		CEEB8FC42732A95200F4E36A /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB8FC127329B2B00F4E36A /* AccessibilityIdentifiers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,8 +204,6 @@
 		CED349E626E6162A00D5E9EE /* TextFieldBig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBig.swift; sourceTree = "<group>"; };
 		CED349E826E616F600D5E9EE /* TextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditor.swift; sourceTree = "<group>"; };
 		CEEB8FA92732881600F4E36A /* UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CEEB8FAB2732881600F4E36A /* UITests_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITests_iOS.swift; sourceTree = "<group>"; };
-		CEEB8FAD2732881600F4E36A /* UITests_iOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITests_iOSLaunchTests.swift; sourceTree = "<group>"; };
 		CEEB8FB427328F4C00F4E36A /* iOS_TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = iOS_TestPlan.xctestplan; sourceTree = "<group>"; };
 		CEEB8FB52732928C00F4E36A /* UITestsBasicNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestsBasicNavigation.swift; sourceTree = "<group>"; };
 		CEEB8FB7273293CE00F4E36A /* UITests_GlobalContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITests_GlobalContainer.swift; sourceTree = "<group>"; };
@@ -389,12 +386,10 @@
 			isa = PBXGroup;
 			children = (
 				CEEB8FB427328F4C00F4E36A /* iOS_TestPlan.xctestplan */,
-				CEEB8FAB2732881600F4E36A /* UITests_iOS.swift */,
 				CEEB8FB7273293CE00F4E36A /* UITests_GlobalContainer.swift */,
 				CEEB8FC02732980300F4E36A /* Tests */,
 				CEEB8FBF273297DD00F4E36A /* Providers */,
 				CEEB8FBD273297B700F4E36A /* XCUIApplication+Extensions.swift */,
-				CEEB8FAD2732881600F4E36A /* UITests_iOSLaunchTests.swift */,
 			);
 			path = UITests_iOS;
 			sourceTree = "<group>";
@@ -654,12 +649,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEEB8FB8273293CE00F4E36A /* UITests_GlobalContainer.swift in Sources */,
-				CEEB8FAE2732881600F4E36A /* UITests_iOSLaunchTests.swift in Sources */,
 				CEEB8FB62732928C00F4E36A /* UITestsBasicNavigation.swift in Sources */,
-				CEEB8FAC2732881600F4E36A /* UITests_iOS.swift in Sources */,
 				CEEB8FBC273296A800F4E36A /* UITestProvider.swift in Sources */,
 				CEEB8FBE273297B700F4E36A /* XCUIApplication+Extensions.swift in Sources */,
 				CEEB8FBA2732961E00F4E36A /* UITestsTabbarProvider.swift in Sources */,
+				CEEB8FC42732A95200F4E36A /* AccessibilityIdentifiers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

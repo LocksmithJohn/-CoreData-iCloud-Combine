@@ -18,7 +18,6 @@ struct TabBar: View {
                 .tabItem {
                     Image(systemName: "1.circle")
                         .accessibilityIdentifier("tab inbox")
-
                     Text("Inbox")
                 }
                 .tag(1)
@@ -36,7 +35,6 @@ struct TabBar: View {
                 .tabItem {
                     Image(systemName: "3.circle")
                         .accessibilityIdentifier("tab projects")
-
                     Text("Projects")
                 }
                 .tag(3)

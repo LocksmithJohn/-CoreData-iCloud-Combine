@@ -87,7 +87,7 @@ struct IOS_ProjectDetailsScreen: IOSScreen {
                                         leftButtonImage: Image(systemName: "arrowshape.turn.up.backward"),
                                         leftButtonAction: { router.pop() },
                                         mainColor: .projectColor,
-                                        accessibilityIdentifier: Identifier.screenTitleProjectDetails))
+                                        identifier: .screenTitleProjectDetails))
         .onAppear { fillInData() }
     }
     

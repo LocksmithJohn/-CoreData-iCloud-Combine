@@ -64,7 +64,7 @@ struct IOS_TasksScreen: IOSScreen {
             .modifier(NavigationBarModifier(type.title,
                                             syncDate: $date,
                                             mainColor: .taskColor,
-                                            accessibilityIdentifier: Identifier.screenTitleTasks))
+                                            identifier: .screenTitleTasks))
         .onReceive(tasksPublisher, perform: { tasks = $0 })
         .onReceive(datePublisher, perform: { date = $0 })
         .onReceive(keyboard.$isVisible, perform: {

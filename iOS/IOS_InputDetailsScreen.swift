@@ -25,7 +25,7 @@ struct IOS_InputDetailsScreen: IOSScreen {
                                         leftButtonImage: Image(systemName: "arrowshape.turn.up.backward"),
                                         leftButtonAction: { container.routerInbox.pop() },
                                         mainColor: .inboxColor,
-                                        accessibilityIdentifier: Identifier.screenTitleInbox))
+                                        identifier: .screenTitleInbox))
     }
 }
 

@@ -33,6 +33,6 @@ struct IOS_InboxScreen: IOSScreen {
         }
         .modifier(NavigationBarModifier(type.title,
                                         mainColor: .inboxColor,
-                                        accessibilityIdentifier: Identifier.screenTitleInbox))
+                                        identifier: .screenTitleInbox))
     }
 }

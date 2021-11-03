@@ -17,7 +17,6 @@ final class DateManager {
 
     private func getTime() -> String {
         let diffComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: lastSynchDate, to: Date())
-        let hours = String(diffComponents.hour ?? 0)
         let minutes = String(diffComponents.minute ?? 0)
         let seconds = String(diffComponents.second ?? 0)
         
