@@ -7,40 +7,58 @@
 import CoreData
 import Foundation
 
-struct Project: Equatable {
+struct Project: Equatable, Identifiable, Hashable {
+    var id: UUID
     var name: String = ""
     var description: String? = nil
     var tasks: [Task]
 }
 
-struct Task: Equatable {
+struct Task: Equatable, Identifiable, Hashable {
+    var id: UUID
     var name: String = ""
     var description: String? = nil
-    var parentProject: String = ""
+    var parentProject: String = "" // tutaj zmienic na uuid projectu
 }
 
 extension Project {
-    init(_ project_cd: Project_CD) {
-        name = project_cd.name ?? ""
-        description = project_cd.projectDescription
-        tasks = []
+    init?(_ project_cd: Project_CD) {
+        guard let id = project_cd.id else { return nil }
+        
+        self.name = project_cd.name ?? ""
+        self.description = project_cd.projectDescription
+        self.id = id
+        self.tasks = project_cd.tasks
+    }
+}
+
+extension Project_CD {
+    convenience init(_ project: Project) {
+        self.init()
+        name = project.name
+        projectDescription = project.description
+//        saveTasks(project.tasks)
     }
 }
 
 extension Task {
-    init(_ task_cd: Task_CD) {
-        name = task_cd.name ?? ""
-        description = task_cd.taskDescription
+    init?(_ task_cd: Task_CD) {
+        guard let id = task_cd.id else { return nil }
+        
+        self.id = id
+        self.name = task_cd.name ?? ""
+        self.description = task_cd.taskDescription
     }
 }
-//
-//extension Task_CD {
-//    init(_ task: Task) {
-////        super.init()
-//        name = task.name
-//        taskDescription = task.description
-//    }
-//}
+
+
+extension Task_CD {
+    convenience init(_ task: Task) {
+        self.init()
+        self.name = task.name // tutaj sie wypieprza
+        self.taskDescription = task.description
+    }
+}
 
 struct Input: Equatable {
     var name: String = ""

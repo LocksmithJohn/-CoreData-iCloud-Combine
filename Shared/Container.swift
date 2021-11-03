@@ -13,25 +13,36 @@ class Container: ObservableObject {
     let dateManager = DateManager()
     let appState: AppState
     let coreDataManager: CoreDataManager
-    let tasksInteractor: TasksInteractor
-    let projectsInteractor: ProjectsInteractor
-    let inputsInteractor: InputInteractor
+    let interactor: InteractorProtocol
+    
+    private var bag = Set<AnyCancellable>()
 
 #if os(iOS)
-    let routerInbox = IOSRouter()
-    let routerTasks = IOSRouter()
-    let routerProjects = IOSRouter()
+    @Published var routerInbox = IOS_Router()
+    @Published var routerTasks = IOS_Router()
+    @Published var routerProjects = IOS_Router()
 #elseif os(macOS)
-    @Published var router = IOSRouter() // tutaj logikę tego routera trzeba jakos zmienic
+    let router = MAC_Router()
 #endif
     
     init() {
         self.coreDataManager = CoreDataManager(dateManager: dateManager)
         self.appState = AppState(coreDataManager: coreDataManager)
-        self.tasksInteractor = TasksInteractor(appstate: appState)
-        self.projectsInteractor = ProjectsInteractor(appstate: appState)
-        self.inputsInteractor = InputInteractor(appstate: appState)
-        let asdf = \AppState.errors
+        self.interactor = Interactor(appState: appState, coreDataManager: coreDataManager)
+//        let asdf = \AppState.errors
+        bindRouters()
+    }
+    
+    private func bindRouters() {
+        #if os(iOS)
+        Publishers.Merge3(routerTasks.$screens,
+                          routerProjects.$screens,
+                          routerInbox.$screens)
+            .sink { [weak self] _ in
+                self?.objectWillChange.send()
+            }
+            .store(in: &bag)
+        #endif
     }
     
 }

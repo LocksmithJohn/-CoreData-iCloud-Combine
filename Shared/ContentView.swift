@@ -13,7 +13,7 @@ struct ContentView: View {
     var body: some View {
         
 #if os(macOS)
-        MacView().environmentObject(container)
+        MAC_View().environmentObject(container)
 #else
         TabBar().environmentObject(container)
 #endif
