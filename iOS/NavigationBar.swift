@@ -16,9 +16,9 @@ struct NavigationBar: View {
     @Binding var syncDate: String?
     
     let title: String?
-    let leftButtonImage: Image?
+    let leftImageView: AnyView?
     let leftButtonAction: (() -> Void)?
-    let rightButtonImage: Image?
+    let rightImageView: AnyView?
     let rightButtonAction: (() -> Void)?
     let mainColor: Color
     let identifier: Identifier
@@ -33,14 +33,14 @@ struct NavigationBar: View {
                     .addIdentifier(identifier)
             }
             HStack {
-                if let leftButtonImage = leftButtonImage {
+                if let leftButtonImage = leftImageView {
                     Button(action: { leftButtonAction?() },
                            label: { leftButtonImage })
                         .padding()
                 }
                 Spacer()
-                if let rightButtonImage = rightButtonImage {
-                    Button(action: { leftButtonAction?() },
+                if let rightButtonImage = rightImageView {
+                    Button(action: { rightButtonAction?() },
                            label: { rightButtonImage })
                         .padding()
                 }

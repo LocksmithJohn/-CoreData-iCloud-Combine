@@ -10,21 +10,15 @@ import SwiftUI
 struct TasksNavigationController: NavigationController {
     
     @EnvironmentObject var container: Container
-    @EnvironmentObject var router: IOS_Router
 
-
-//    init(router: IOS_Router) {
-//        self.router = router
-//    }
-    
     func updateUIViewController(_ navigationController: UINavigationController, context: Context) {
         snapShotStackView(navigationController: navigationController,
                           container: container,
-                          router: router)
+                          router: container.routerTasks)
     }
     
     func setInitialView() {
-        router.setInitial(.tasks)
+        container.routerTasks.setInitial(.tasks)
     }
  
 }

@@ -8,20 +8,25 @@
 import Combine
 import Foundation
 
-protocol TasksInteractorProtocol: InteractorProtocol {
+protocol TasksInteractorProtocol: InteractorProtocol { // TODO: w interaktorze powinno się znajdować więcej logiki biznesowej - tak jak w viewmodelu
         
-    func add(task: Task)
-    func edit(id: UUID, newTask: Task)
+    func add(name: String, description: String)
+    func editCurrentTask(name: String, type: TaskType?)
+    func editType(task: Task, taskType: TaskType)
     func deleteCurrentTask()
-    func setCurrentTask(id: UUID)
+    func deleteTask(id: UUID)
     func deleteTasks()
-    
+    func setCurrentTask(id: UUID)
+
 }
 
 extension Interactor: TasksInteractorProtocol, ObservableObject {
     
-    func add(task: Task) {
-        coreDataManager.saveTask(task: task)
+    func add(name: String, description: String) {
+        let newTask = Task(name: name,
+                           description: description,
+                           parentProject: "")
+        coreDataManager.saveTask(task: newTask)
     }
 
     func setCurrentTask(id: UUID) {
@@ -31,6 +36,10 @@ extension Interactor: TasksInteractorProtocol, ObservableObject {
     func deleteTasks() {
         coreDataManager.deleteAllTasks()
     }
+
+    func deleteTask(id: UUID) {
+        coreDataManager.deleteTask(id: id)
+    }
     
     func deleteCurrentTask() {
         if let id = appState.currentTaskID {
@@ -38,8 +47,17 @@ extension Interactor: TasksInteractorProtocol, ObservableObject {
         }
     }
     
-    func edit(id: UUID, newTask: Task) {
-        coreDataManager.editTask(id: id, newTask: newTask)
+    func editCurrentTask(name: String, type: TaskType? = nil) {
+        if let task = appState.getCurrentTask() {
+            coreDataManager.editTask(id: task.id,
+                                     taskName: name,
+                                     taskDescription: "newTask.description",
+                                     taskType: type?.name ?? task.taskType)
+        }
+    }
+
+    func editType(task: Task, taskType: TaskType) {
+        coreDataManager.editTask(id: task.id, taskType: taskType.name)
     }
     
 }

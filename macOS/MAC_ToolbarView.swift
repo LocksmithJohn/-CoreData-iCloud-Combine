@@ -21,7 +21,6 @@ struct MAC_ToolbarView: View {
                 Text(date)
             }
             Button(action: { 
-                print("filter toolbar action") 
                 showingSheet = true
             }, label: {
                 Label("Record Progress", systemImage: "book.circle")

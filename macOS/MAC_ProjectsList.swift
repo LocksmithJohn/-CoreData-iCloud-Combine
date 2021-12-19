@@ -46,6 +46,9 @@ struct MAC_ProjectsList: View {
             MAC_Button(action: {
                 router.route.send(.projects(.creating))
             }, label: "Add Project")
+            MAC_Button(action: {
+                interactor?.deleteAll()
+            }, label: "Delete All")
             .padding()
         }
     }

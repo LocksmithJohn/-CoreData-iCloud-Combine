@@ -10,6 +10,7 @@ import Foundation
 enum IOS_SType { // for iPhone
     case tasks
     case taskDetails
+    case taskCreate
     case projects
     case projectDetails
     case projectCreate
@@ -25,11 +26,13 @@ enum IOS_SType { // for iPhone
         case .inbox:
             return "Inbox"
         case .taskDetails:
-            return "Task details"
+            return "Task"
+        case .taskCreate:
+            return "Create Task"
         case .projectDetails:
-            return "Project details"
+            return "Project"
         case .inputDetails:
-            return "Input details"
+            return "Input"
         case .projectCreate:
             return "Create Project"
         }

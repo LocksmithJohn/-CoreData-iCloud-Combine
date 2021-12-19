@@ -8,7 +8,21 @@
 import SwiftUI
 
 struct IOS_TaskRow: View {
+
+    let taskName: String
+    let tapRowAction: () -> Void
+    let checkboxAction: () -> Void
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack(alignment: .center, spacing: 20) {
+            IOS_CheckboxView(tapAction: checkboxAction,
+                             checkboxSize: .small)
+            HStack {
+                Text(taskName)
+                    .font(.system(size: 20))
+                Spacer()
+            }
+            .onTapGesture { tapRowAction() }
+        }
     }
 }

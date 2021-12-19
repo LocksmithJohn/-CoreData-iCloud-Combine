@@ -18,65 +18,106 @@ struct IOS_TasksScreen: IOSScreen {
     @State private var newTaskName: String = ""
     @State private var isPopupVisible = false
     @State private var tasks: [Task] = []
+    @State private var filteredTasks: [Task] = []
     @State private var date: String?
-    
+    @State private var selectionTag: Int = 0
+
     private let appState: TasksAppStateProtocol
-    private let tasksInteractor: TasksInteractorProtocol?
+    private let interactor: TasksInteractorProtocol?
     private let router: IOS_Router
     
     init(appState: TasksAppStateProtocol,
          interactor: InteractorProtocol,
          router: IOS_Router) {
-        self.tasksInteractor = interactor as? TasksInteractorProtocol
+        self.interactor = interactor as? TasksInteractorProtocol
         self.appState = appState
         self.router = router
     }
     
     var body: some View {
-            VStack {
-                ZStack {
-                HStack {
-                    Spacer()
-                    Button { tasksInteractor?.deleteTasks() } label: {
-                        Text("Delete All")
-                    }
-                    .frame(width: 100)
-                    .buttonStyle(BorderedButtonStyle(color: .taskColor))
-                }
-                List {
-                    ForEach(tasks, id: \.self) { task in
-                        Text(task.name)
-                            .onTapGesture {
-                                tasksInteractor?.setCurrentTask(id: task.id)
-                                router.route(from: type)
-                            }
-                            .background(Color.orange)
-                            .padding()
-                        
-                        
-                    }
-                }
-                AboveKeyboardView(isExpanded: $isPopupVisible,
-                                  taskname: $newTaskName,
-                                  action: keyboard.dismiss)
-                }
+        VStack {
+            pickerView
+                .padding(.horizontal)
+            scrollView
+                .padding(.horizontal)
+            AboveKeyboardView(isExpanded: $isPopupVisible,
+                              taskname: $newTaskName,
+                              action: keyboard.dismiss)
         }
-            .modifier(NavigationBarModifier(type.title,
-                                            syncDate: $date,
-                                            mainColor: .taskColor,
-                                            identifier: .screenTitleTasks))
-        .onReceive(tasksPublisher, perform: { tasks = $0 })
+        .modifier(NavigationBarModifier(type.title,
+                                        syncDate: $date,
+                                        mainColor: .taskColor,
+                                        identifier: .screenTitleTasks))
+        .onReceive(tasksPublisher, perform: {
+            updateTasks(tasks: $0)
+            filterTasks()
+        })
         .onReceive(datePublisher, perform: { date = $0 })
         .onReceive(keyboard.$isVisible, perform: {
             isPopupVisible = $0
-            saveOnRespond()
+            saveNewTask()
         })
-}
+        .onChange(of: selectionTag, perform: { _ in filterTasks() })
+        .background(Color.backgroundMain.ignoresSafeArea())
+    }
+
+    private var scrollView: some View {
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 16) {
+                ForEach(filteredTasks, id: \.self) { task in
+                    IOS_TaskRow(
+                        taskName: task.name,
+                        tapRowAction: {
+                            interactor?.setCurrentTask(id: task.id)
+                            router.route(from: type)
+                        },
+                        checkboxAction: {})
+                }
+            }
+        }
+    }
+
+    private var pickerView: some View {
+        Picker("Add", selection: $selectionTag) {
+            Text("Task").tag(0)
+            Text("Next action").tag(1)
+            Text("Waiting for").tag(2)
+        }
+        .pickerStyle(.segmented)
+        .frame(height: 60)
+        .background(Color.backgroundMain)
+    }
+
+    private var testDeleteButton: some View {
+        HStack {
+            Spacer()
+            Button { interactor?.deleteTasks() } label: {
+                Text("Delete All")
+            }
+            .frame(width: 100)
+        }
+    }
+
+    private func updateTasks(tasks: [Task]) {
+        self.tasks = tasks
+    }
+
+    private func filterTasks() {
+        filteredTasks = tasks.filter {
+            var type: TaskType {
+                switch selectionTag {
+                case 0: return .task
+                case 1: return .nextAction
+                default: return .waitingFor
+                }
+            }
+            return $0.taskType == type.name
+        }
+    }
     
-    private func saveOnRespond() {
+    private func saveNewTask() {
         if !newTaskName.isEmpty && !isPopupVisible {
-            let task = Task(id: UUID(), name: newTaskName, description: "subtitle", parentProject: "nil")
-            tasksInteractor?.add(task: task)
+            interactor?.add(name: newTaskName, description: "description")
             newTaskName = ""
         }
     }

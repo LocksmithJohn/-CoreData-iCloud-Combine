@@ -45,6 +45,9 @@ struct MAC_TasksList: View {
             MAC_Button(action: {
                 router.route.send(.tasks(.creating))
             }, label: "Add Task")
+            MAC_Button(action: {
+                interactor?.deleteTasks()
+            }, label: "Delete All")
             .padding()
         }
     }

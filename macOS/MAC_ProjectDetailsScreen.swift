@@ -10,14 +10,11 @@ import SwiftUI
 
 struct MAC_ProjectDetailsScreen: View {
     
-    @StateObject
-    var viewModel = MAC_ProjectDetailsScreenViewModel()
+    @StateObject var viewModel = MAC_ProjectDetailsScreenViewModel()
     
     @State private var projectName: String = ""
     @State private var projectDescription: String = ""
-//    @State private var tasks: [Task] = [] { didSet {
-//        print("filter tasks: \(tasks)")
-//    }}
+
     @State private var route: Route = .projects(.creating)
     @State private var addingTaskName: String = ""
     
@@ -33,18 +30,6 @@ struct MAC_ProjectDetailsScreen: View {
         self.router = router
         self.projectsInteractor = projectsInteractor
         fillInData()
-//        routePublisher.sink { r in
-//            print("filter routePublisher.sink")
-//            route = r
-////            fillInData()
-//        }
-//        .store(in: &bags)
-//        routePublisher
-//            .sink { r in
-//                print("filter --- - ")
-//                route = r
-//            }
-//            .store(in: &bags)
     }
 
     var body: some View {
@@ -91,7 +76,6 @@ struct MAC_ProjectDetailsScreen: View {
     private func addTask() {
         let task = Task(id: UUID(), name: addingTaskName, description: "-", parentProject: "|")
         viewModel.tasks.append(task)
-//        tasks.append(task)
         addingTaskName = ""
     }
     
@@ -135,7 +119,7 @@ struct MAC_ProjectDetailsScreen: View {
                            newDescription: projectDescription,
                            newTasks: viewModel.tasks)
         } editing: {
-            projectsInteractor?.editProject(newName: projectName,
+            projectsInteractor?.editCurrentProject(newName: projectName,
                                    newDescription: projectDescription,
                                    newTasks: viewModel.tasks)
         }

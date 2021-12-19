@@ -14,7 +14,7 @@ struct IOS_ProjectRow: View {
     @State private var cellReduced = false
     @State private var toolViewVisible = false
 
-    private let project: Project // tutaj to jest za duze do jednej komorki
+    private let project: Project // TODO: caly project jest za duzy do jednej komórki? downcast do czego mniejszego?
     private let toolViewWidth: CGFloat = 60
     private let projectsInteractor: ProjectsInteractorProtocol?
 
@@ -25,7 +25,7 @@ struct IOS_ProjectRow: View {
     }
 
     private var texts: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: 8) {
             Text(project.name)
                 .font(.headline)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -37,7 +37,7 @@ struct IOS_ProjectRow: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .padding(.leading, 16)
+        .padding()
     }
     
     var body: some View {
@@ -46,27 +46,27 @@ struct IOS_ProjectRow: View {
                 texts
             }
             .frame(maxWidth: .infinity)
-            .frame(height: 60)
-            .background(Color.gray.opacity(cellSizeFactor / 3))
+            .frame(height: 64)
+            .background(Color.objectMain)
             .cornerRadius(12)
-            .border(Color.black, width: 1)
-            .scaleEffect(CGSize(width: cellSizeFactor, height: cellSizeFactor))
-            .animation(.linear(duration: 0.05), value: cellSizeFactor)
+//            .border(Color.black, width: 1)
+//            .scaleEffect(CGSize(width: cellSizeFactor, height: cellSizeFactor))
+//            .animation(.linear(duration: 0.05), value: cellSizeFactor)
 //            .onTapGesture {
 //                toolViewVisible = false
 //                cellReduced = false
 //                resetFactors()
 //            }
-            .gesture(
-                DragGesture()
-                    .onChanged { gesture in
-                        calculateFactors(gesture.translation.width)
-                    }
-                    .onEnded { gesture in
-                        toolViewPosition = toolViewWidth
-                        resetFactors()
-                    }
-            )
+//            .gesture(
+//                DragGesture()
+//                    .onChanged { gesture in
+//                        calculateFactors(gesture.translation.width)
+//                    }
+//                    .onEnded { gesture in
+//                        toolViewPosition = toolViewWidth
+//                        resetFactors()
+//                    }
+//            )
 //            IOS_ToolView(toolViewPosition: $toolViewPosition,
 //                     dismiss: { toolViewVisible = false },
 //                     interactor: interactor,
@@ -92,7 +92,6 @@ struct IOS_ProjectRow: View {
         
         if (-150 ..< -60).contains(gestureWidth) {
             toolViewPosition = toolViewWidth + gestureWidth
-            print("filter toolViewPosition: \(toolViewPosition)")
         }
         
         if gestureWidth < -120 && !toolViewVisible {
@@ -105,10 +104,3 @@ struct IOS_ProjectRow: View {
     }
     
 }
-//
-//struct MyRowCell_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MyRowCell(title: "Pierwszy projekt",
-//                  description: "Opis mojego pierwszego projektu")
-//    }
-//}

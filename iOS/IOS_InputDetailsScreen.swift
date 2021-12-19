@@ -14,18 +14,20 @@ struct IOS_InputDetailsScreen: IOSScreen {
     
     var body: some View {
         VStack {
-            Spacer()
-            TestViewNewDesign()
-            
+            Spacer()            
         }
         .background(Color.white)
         .ignoresSafeArea()
         
         .modifier(NavigationBarModifier(type.title,
-                                        leftButtonImage: Image(systemName: "arrowshape.turn.up.backward"),
+                                        leftImageView: AnyView(leftImage),
                                         leftButtonAction: { container.routerInbox.pop() },
                                         mainColor: .inboxColor,
                                         identifier: .screenTitleInbox))
+    }
+
+    private var leftImage: some View {
+        Image(systemName: "arrowshape.turn.up.backward").foregroundColor(Color.inboxColor)
     }
 }
 

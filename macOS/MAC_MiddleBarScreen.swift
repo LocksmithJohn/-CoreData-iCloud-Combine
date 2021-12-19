@@ -53,31 +53,7 @@ struct MAC_MiddleBarScreen: View {
         }
     }
     
-//    private var bottomView: some View {
-//            return HStack {
-//                switch route {
-//                case .tasks:
-//                        MAC_Button(action: {
-//                            container.router.route.send(.tasks(.creating))
-//                    }, label: "Add Task")
-//                        .padding()
-//
-//                case .projects:
-//                    MAC_Button(action: {
-//                        container.interactor.
-//                        projectsInteractor.add(newName: "projekt name", newDescription: "projekt opis", newTasks: [])
-////                        router.type = .projects(.details)
-//                    }, label: "Add Project")
-//                default:
-//                    MAC_Button(action: {
-////                        container.inputsInteractor.add(input: Input(name: "inoput", description: "asdf"))
-//                    }, label: "Add Input")
-//
-//            }
-//        }
-//    }
-    
-    private var tasksPublisher: AnyPublisher<[Task], Never> { // tutaj te poniższe mają byc w podwidokach - wywalic stad
+    private var tasksPublisher: AnyPublisher<[Task], Never> { // TODO: refactor: te poniższe mają byc w podwidokach - wywalic stad
         return container.appState.tasksSubject
             .eraseToAnyPublisher()
     }

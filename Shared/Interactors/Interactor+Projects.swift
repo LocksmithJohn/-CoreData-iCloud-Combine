@@ -10,30 +10,34 @@ import Foundation
 protocol ProjectsInteractorProtocol: InteractorProtocol {
     
     func add(newName: String, newDescription: String, newTasks: [Task])
+    func addTaskToCurrentProject(task: Task)
+
     func deleteProject(_ id: UUID)
-    func editProject(newName: String, newDescription: String, newTasks: [Task])
-    func setCurrentProject(id: UUID)
-    func deleteAll()
     func deleteCurrentProject()
-    
+    func deleteAll()
+
+    func editCurrentProject(newName: String?, newDescription: String?, newTasks: [Task]?)
+    func editTypeInTaskInCurrentProject(taskId: UUID?, taskType: TaskType?)
+
+    func setCurrentProject(id: UUID?)
+
 }
 
 extension Interactor : ProjectsInteractorProtocol {
-    
+
     func add(newName: String, newDescription: String, newTasks: [Task]) {
         let project = Project(id: UUID(),
                               name: newName,
                               description: newDescription,
                               tasks: newTasks)
         coreDataManager.saveProject(project: project)
-        addTasksFromProject(project: project)
     }
     
     func deleteAll() {
         coreDataManager.deleteAllProjects()
     }
 
-    func setCurrentProject(id: UUID) {
+    func setCurrentProject(id: UUID?) {
         appState.currentProjectID = id
     }
 
@@ -45,30 +49,33 @@ extension Interactor : ProjectsInteractorProtocol {
         if let id = appState.currentProjectID {
             coreDataManager.deleteProject(id: id)
         } else {
-            // tutaj obsluga erra
+            // TODO: obsluga erra
         }
     }
     
-    func editProject(newName: String,
-                     newDescription: String,
-                     newTasks: [Task]) {
+    func editCurrentProject(newName: String? = nil,
+                     newDescription: String? = nil,
+                     newTasks: [Task]? = nil) {
         if let id = appState.currentProjectID {
-            let project = Project(id: id, name: newName, description: newDescription, tasks: newTasks)
-            coreDataManager.editProject(id: id, newProject: project)
-        } else {
-            // tutaj obsluga errora
-        }
+            coreDataManager.editProject(id: id,
+                                        newName: newName,
+                                        newDescription: newDescription,
+                                        newTasks: newTasks)
+        } else { }
     }
     
-    func adTaskToCurrentProject(task: Task) {
+    func addTaskToCurrentProject(task: Task) {
         if let currentID = appState.currentProjectID {
             coreDataManager.addTaskToProject(projectID: currentID, task: task)
         }
     }
     
-    func addTasksFromProject(project: Project) {
-        project.tasks.forEach {
-            coreDataManager.saveTask(task: $0)
+    func editTypeInTaskInCurrentProject(taskId: UUID?, taskType: TaskType?) {
+        if let currentProjectID = appState.currentProjectID,
+           let taskId = taskId {
+            coreDataManager.editTaskInProject(projectId: currentProjectID,
+                                              taskId: taskId,
+                                              taskType: taskType)
         }
     }
     

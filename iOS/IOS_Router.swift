@@ -10,13 +10,7 @@ import Foundation
 class IOS_Router: ObservableObject {
 
     @Published private (set) var screens: [Screen] = [] {
-//        willSet {
-//            objectWillChange.send()
-//        }
-        didSet {
-            printStactInfo()
-//            objectWillChange.send()
-        }
+        didSet { printStactInfo() }
     }
         
     private func send(_ action: StackAction) {

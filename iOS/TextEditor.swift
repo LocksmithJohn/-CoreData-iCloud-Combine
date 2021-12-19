@@ -16,16 +16,11 @@ struct TextEditorDefault: View {
             Text("placeholder")
                 .font(.system(size: 20, weight: .bold, design: .rounded))
                 .foregroundColor(.projectColor.opacity(0.3))
-//                .background(Color.pink)
-
             TextEditor(text: $inputText)
-                .font(.system(size: 20, weight: .bold, design: .rounded))
-                .foregroundColor(.blue)
+                .font(.system(size: 20))
                 .lineLimit(1)
-                .background(Color.pink)
-
+                .background(BlurredView())
         }
-        .background(Color.red)
     }
     
 }

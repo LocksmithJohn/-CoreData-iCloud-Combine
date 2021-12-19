@@ -15,10 +15,11 @@ struct Project: Equatable, Identifiable, Hashable {
 }
 
 struct Task: Equatable, Identifiable, Hashable {
-    var id: UUID
+    var id: UUID = UUID()
     var name: String = ""
     var description: String? = nil
-    var parentProject: String = "" // tutaj zmienic na uuid projectu
+    var parentProject: String = "" // TODO: zmienic na uuid projectu
+    var taskType: String? = nil
 }
 
 extension Project {
@@ -37,7 +38,6 @@ extension Project_CD {
         self.init()
         name = project.name
         projectDescription = project.description
-//        saveTasks(project.tasks)
     }
 }
 
@@ -48,6 +48,7 @@ extension Task {
         self.id = id
         self.name = task_cd.name ?? ""
         self.description = task_cd.taskDescription
+        self.taskType = task_cd.taskType ?? ""
     }
 }
 
@@ -55,8 +56,9 @@ extension Task {
 extension Task_CD {
     convenience init(_ task: Task) {
         self.init()
-        self.name = task.name // tutaj sie wypieprza
+        self.name = task.name
         self.taskDescription = task.description
+        self.taskType = task.taskType
     }
 }
 

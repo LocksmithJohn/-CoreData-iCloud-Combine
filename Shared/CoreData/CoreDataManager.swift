@@ -12,6 +12,7 @@ import CoreData
 class CoreDataManager: NSObject {
 
     let projectsSubject = CurrentValueSubject<[Project_CD], CoreDataError>([])
+    let currentProjectSubject = PassthroughSubject<Project_CD, CoreDataError>()
     let tasksSubject = CurrentValueSubject<[Task_CD], CoreDataError>([])
     let syncTimeSubject = PassthroughSubject<String?, Never>()
     
@@ -29,7 +30,6 @@ class CoreDataManager: NSObject {
         let container = NSPersistentCloudKitContainer(name: "Model")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                print("filterr      error 3")
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
@@ -42,7 +42,6 @@ class CoreDataManager: NSObject {
                 try managedContext.save()
             } catch {
                 let nserror = error as NSError
-                print("filterr      error 2")
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
@@ -107,32 +106,27 @@ enum CoreDataError: Error {
 }
 
 extension CoreDataManager: NSFetchedResultsControllerDelegate {
-        
+
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         switch controller.fetchRequest.entity?.name {
         case String(describing: Project_CD.self):
             guard let projects = controller.fetchedObjects,
                   let projects = projects as? [Project_CD] else {
-                print("filterr      CoreDataManager:  projectsSubject.send")
 
-                projectsSubject.send(completion: .failure(.fetchEntity(type: .project)))
-                return
-            }
+                      projectsSubject.send(completion: .failure(.fetchEntity(type: .project)))
+                      return
+                  }
             projectsSubject.send(projects)
         case String(describing: Task_CD.self):
             guard let tasks = controller.fetchedObjects,
                   let tasks = tasks as? [Task_CD] else {
-                print("filterr      CoreDataManager:  tasksSubject.send")
-
-                tasksSubject.send(completion: .failure(.fetchEntity(type: .task)))
-                return
-            }
+                      tasksSubject.send(completion: .failure(.fetchEntity(type: .task)))
+                      return
+                  }
             tasksSubject.send(tasks)
         default:
-            print("filterr      error 4")
             return
         }
-        print("filterr      CoreDataManager:  dateManager.updateDate()")
         dateManager.updateDate()
     }
     

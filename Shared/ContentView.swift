@@ -15,7 +15,8 @@ struct ContentView: View {
 #if os(macOS)
         MAC_View().environmentObject(container)
 #else
-        TabBar().environmentObject(container)
+        IOS_CustomTabbar().environmentObject(container)
+//            .popupModifier(popupType: container.appState.popupType)
 #endif
     }
 }

@@ -36,7 +36,6 @@ final class DateManager {
     }
     
     func startSyncTimer() {
-        print("filter startSyncTimer()")
         timerPublisher = Timer.TimerPublisher(interval: 1.0, runLoop: .main, mode: .default)
             .autoconnect()
             .map { [weak self] _ in self?.getTime() }
@@ -48,6 +47,3 @@ final class DateManager {
     }
     
 }
-//
-//public typealias MyAnyPublisher<T> = AnyPublisher<T, Never> // tutaj do opublicznych aliasow
-//public typealias MyPassthroughSubject<T> = PassthroughSubject<T, Never>

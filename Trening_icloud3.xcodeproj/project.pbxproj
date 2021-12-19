@@ -26,7 +26,7 @@
 		CE068B3826D83EC600E82573 /* AboveKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE068B3726D83EC600E82573 /* AboveKeyboardView.swift */; };
 		CE068B3A26D9610F00E82573 /* IOS_TaskRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE068B3926D9610F00E82573 /* IOS_TaskRow.swift */; };
 		CE068B3C26D9620300E82573 /* IOS_ToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE068B3B26D9620300E82573 /* IOS_ToolView.swift */; };
-		CE163C1726EFFD5A00DA1323 /* TestViewNewDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE163C1626EFFD5A00DA1323 /* TestViewNewDesign.swift */; };
+		CE17B2652762C4A40055B415 /* PopupModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE17B2642762C4A40055B415 /* PopupModifier.swift */; };
 		CE2BF6E526D3CF3A00743E81 /* Task_CD+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BF6E126D3CF3A00743E81 /* Task_CD+CoreDataClass.swift */; };
 		CE2BF6E626D3CF3A00743E81 /* Task_CD+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BF6E126D3CF3A00743E81 /* Task_CD+CoreDataClass.swift */; };
 		CE2BF6E926D3CF3A00743E81 /* Project_CD+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BF6E326D3CF3A00743E81 /* Project_CD+CoreDataClass.swift */; };
@@ -52,7 +52,19 @@
 		CE481D1026EABB1D001F838E /* Task_CD+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC4BC0B26E6CC7C00692007 /* Task_CD+CoreDataProperties.swift */; };
 		CE481D1126EABB20001F838E /* Project_CD+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC4BC0C26E6CC7C00692007 /* Project_CD+CoreDataProperties.swift */; };
 		CE481D1226EABCAD001F838E /* MAC_ProjectDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED349E526E4FC0E00D5E9EE /* MAC_ProjectDetailsScreen.swift */; };
+		CE52F139275069AF00B1B461 /* StateTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52F138275069AF00B1B461 /* StateTypes.swift */; };
+		CE52F13A275069AF00B1B461 /* StateTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52F138275069AF00B1B461 /* StateTypes.swift */; };
+		CE6068F0276E3FF200D4BF1A /* Haptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6068EF276E3FF200D4BF1A /* Haptic.swift */; };
+		CE6068F2276E6F0600D4BF1A /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6068F1276E6F0600D4BF1A /* Icon.swift */; };
 		CE7057A526F15001001743DD /* MAC_ProjectDetailsScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7057A426F15001001743DD /* MAC_ProjectDetailsScreenViewModel.swift */; };
+		CEAEF17227653E5C00109F55 /* IOS_NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAEF17127653E5C00109F55 /* IOS_NewTaskView.swift */; };
+		CEAEF1762766198400109F55 /* FirstResponderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAEF1752766198400109F55 /* FirstResponderTextField.swift */; };
+		CEAEF17827661B1C00109F55 /* FirstResponderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAEF17727661B1C00109F55 /* FirstResponderTextView.swift */; };
+		CEBB6A1127616BFA005CD291 /* IOS_CustomTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBB6A1027616BFA005CD291 /* IOS_CustomTabbar.swift */; };
+		CEBD2E7A275455C30016FCFD /* IOS_TaskAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBD2E79275455C30016FCFD /* IOS_TaskAddView.swift */; };
+		CEBD2E7C275459360016FCFD /* IOS_CheckboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBD2E7B275459360016FCFD /* IOS_CheckboxView.swift */; };
+		CEBD2E7E27545E5F0016FCFD /* IOS_ProjectSubitemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBD2E7D27545E5F0016FCFD /* IOS_ProjectSubitemView.swift */; };
+		CEBD2E80275462290016FCFD /* IOS_GeneralActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBD2E7F275462290016FCFD /* IOS_GeneralActionsView.swift */; };
 		CEC4BC0A26E6A13700692007 /* TextFieldSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC4BC0926E6A13700692007 /* TextFieldSmall.swift */; };
 		CEC4BC0D26E6CC7C00692007 /* Task_CD+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC4BC0B26E6CC7C00692007 /* Task_CD+CoreDataProperties.swift */; };
 		CEC4BC0E26E6CC7C00692007 /* Project_CD+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC4BC0C26E6CC7C00692007 /* Project_CD+CoreDataProperties.swift */; };
@@ -82,7 +94,6 @@
 		CED0438026C93C9800B7D003 /* IOS_ProjectDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED0437726C93C9700B7D003 /* IOS_ProjectDetailsScreen.swift */; };
 		CED0438226C93C9800B7D003 /* IOS_InboxScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED0437826C93C9700B7D003 /* IOS_InboxScreen.swift */; };
 		CED0438426C93C9800B7D003 /* IOS_ProjectsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED0437926C93C9800B7D003 /* IOS_ProjectsScreen.swift */; };
-		CED0438826C93C9D00B7D003 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED0438626C93C9D00B7D003 /* TabBar.swift */; };
 		CED0438A26C93C9D00B7D003 /* IOS_SType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED0438726C93C9D00B7D003 /* IOS_SType.swift */; };
 		CED0439126C93CAB00B7D003 /* MAC_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED0438C26C93CAA00B7D003 /* MAC_View.swift */; };
 		CED0439326C93CAB00B7D003 /* MAC_InputDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED0438D26C93CAA00B7D003 /* MAC_InputDetailsScreen.swift */; };
@@ -113,6 +124,7 @@
 		CEEB8FC227329B2B00F4E36A /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB8FC127329B2B00F4E36A /* AccessibilityIdentifiers.swift */; };
 		CEEB8FC327329B2B00F4E36A /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB8FC127329B2B00F4E36A /* AccessibilityIdentifiers.swift */; };
 		CEEB8FC42732A95200F4E36A /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB8FC127329B2B00F4E36A /* AccessibilityIdentifiers.swift */; };
+		CEF74ABA2760A5E600AC3943 /* BlurredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF74AB92760A5E600AC3943 /* BlurredView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,7 +151,7 @@
 		CE068B3726D83EC600E82573 /* AboveKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboveKeyboardView.swift; sourceTree = "<group>"; };
 		CE068B3926D9610F00E82573 /* IOS_TaskRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_TaskRow.swift; sourceTree = "<group>"; };
 		CE068B3B26D9620300E82573 /* IOS_ToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_ToolView.swift; sourceTree = "<group>"; };
-		CE163C1626EFFD5A00DA1323 /* TestViewNewDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewNewDesign.swift; sourceTree = "<group>"; };
+		CE17B2642762C4A40055B415 /* PopupModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupModifier.swift; sourceTree = "<group>"; };
 		CE2BF6E126D3CF3A00743E81 /* Task_CD+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task_CD+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CE2BF6E326D3CF3A00743E81 /* Project_CD+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project_CD+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CE2E66E126C919E700AB6282 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -157,7 +169,18 @@
 		CE2E671526C9B52A00AB6282 /* Trening_icloud3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trening_icloud3.swift; sourceTree = "<group>"; };
 		CE324AA726CDA7060029B2C4 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		CE481C5926E9833A001F838E /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		CE52F138275069AF00B1B461 /* StateTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateTypes.swift; sourceTree = "<group>"; };
+		CE6068EF276E3FF200D4BF1A /* Haptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptic.swift; sourceTree = "<group>"; };
+		CE6068F1276E6F0600D4BF1A /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Icon.swift; path = "../../../Library/Mobile Documents/com~apple~CloudDocs/Icon.swift"; sourceTree = "<group>"; };
 		CE7057A426F15001001743DD /* MAC_ProjectDetailsScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MAC_ProjectDetailsScreenViewModel.swift; sourceTree = "<group>"; };
+		CEAEF17127653E5C00109F55 /* IOS_NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_NewTaskView.swift; sourceTree = "<group>"; };
+		CEAEF1752766198400109F55 /* FirstResponderTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstResponderTextField.swift; sourceTree = "<group>"; };
+		CEAEF17727661B1C00109F55 /* FirstResponderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstResponderTextView.swift; sourceTree = "<group>"; };
+		CEBB6A1027616BFA005CD291 /* IOS_CustomTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_CustomTabbar.swift; sourceTree = "<group>"; };
+		CEBD2E79275455C30016FCFD /* IOS_TaskAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_TaskAddView.swift; sourceTree = "<group>"; };
+		CEBD2E7B275459360016FCFD /* IOS_CheckboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_CheckboxView.swift; sourceTree = "<group>"; };
+		CEBD2E7D27545E5F0016FCFD /* IOS_ProjectSubitemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_ProjectSubitemView.swift; sourceTree = "<group>"; };
+		CEBD2E7F275462290016FCFD /* IOS_GeneralActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_GeneralActionsView.swift; sourceTree = "<group>"; };
 		CEC4BC0926E6A13700692007 /* TextFieldSmall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldSmall.swift; sourceTree = "<group>"; };
 		CEC4BC0B26E6CC7C00692007 /* Task_CD+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task_CD+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CEC4BC0C26E6CC7C00692007 /* Project_CD+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project_CD+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -183,7 +206,6 @@
 		CED0437726C93C9700B7D003 /* IOS_ProjectDetailsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOS_ProjectDetailsScreen.swift; sourceTree = "<group>"; };
 		CED0437826C93C9700B7D003 /* IOS_InboxScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOS_InboxScreen.swift; sourceTree = "<group>"; };
 		CED0437926C93C9800B7D003 /* IOS_ProjectsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOS_ProjectsScreen.swift; sourceTree = "<group>"; };
-		CED0438626C93C9D00B7D003 /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		CED0438726C93C9D00B7D003 /* IOS_SType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOS_SType.swift; sourceTree = "<group>"; };
 		CED0438C26C93CAA00B7D003 /* MAC_View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MAC_View.swift; sourceTree = "<group>"; };
 		CED0438D26C93CAA00B7D003 /* MAC_InputDetailsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MAC_InputDetailsScreen.swift; sourceTree = "<group>"; };
@@ -211,6 +233,7 @@
 		CEEB8FBB273296A800F4E36A /* UITestProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestProvider.swift; sourceTree = "<group>"; };
 		CEEB8FBD273297B700F4E36A /* XCUIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Extensions.swift"; sourceTree = "<group>"; };
 		CEEB8FC127329B2B00F4E36A /* AccessibilityIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifiers.swift; sourceTree = "<group>"; };
+		CEF74AB92760A5E600AC3943 /* BlurredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,7 +282,8 @@
 		CE2E66D826C919E700AB6282 = {
 			isa = PBXGroup;
 			children = (
-				CE163C1626EFFD5A00DA1323 /* TestViewNewDesign.swift */,
+				CE6068F1276E6F0600D4BF1A /* Icon.swift */,
+				CE6068EF276E3FF200D4BF1A /* Haptic.swift */,
 				CE2E670626C919F900AB6282 /* Trening_icloud3.entitlements */,
 				CE2E671526C9B52A00AB6282 /* Trening_icloud3.swift */,
 				CE2E66DD26C919E700AB6282 /* Shared */,
@@ -286,6 +310,7 @@
 				CE068B1726D5AE1300E82573 /* AppState+Downcasting.swift */,
 				CED0436526C93C8800B7D003 /* Strategy.swift */,
 				CED043A426C93CDA00B7D003 /* Models.swift */,
+				CE52F138275069AF00B1B461 /* StateTypes.swift */,
 				CE2E66E126C919E700AB6282 /* ContentView.swift */,
 				CEEB8FC127329B2B00F4E36A /* AccessibilityIdentifiers.swift */,
 				CE2E66E326C919E800AB6282 /* Assets.xcassets */,
@@ -309,16 +334,25 @@
 				CED0436726C93C8800B7D003 /* StackScreenViewController.swift */,
 				CED0435B26C93C8300B7D003 /* TaskNavigationController.swift */,
 				CED0435C26C93C8300B7D003 /* ProjectNavigationController.swift */,
-				CED0438626C93C9D00B7D003 /* TabBar.swift */,
+				CEBB6A1027616BFA005CD291 /* IOS_CustomTabbar.swift */,
 				CED0435926C93C8300B7D003 /* NavigationController.swift */,
 				CED0435A26C93C8300B7D003 /* InboxNavigationController.swift */,
 				CED0435326C93C7C00B7D003 /* NavigationBar.swift */,
+				CE17B2642762C4A40055B415 /* PopupModifier.swift */,
 				CED0436626C93C8800B7D003 /* ScreenFactory.swift */,
 				CED0436F26C93C9000B7D003 /* IOS_Router.swift */,
 				CED0438726C93C9D00B7D003 /* IOS_SType.swift */,
 				CED0437726C93C9700B7D003 /* IOS_ProjectDetailsScreen.swift */,
+				CEAEF17127653E5C00109F55 /* IOS_NewTaskView.swift */,
+				CEBD2E7D27545E5F0016FCFD /* IOS_ProjectSubitemView.swift */,
+				CEBD2E7F275462290016FCFD /* IOS_GeneralActionsView.swift */,
+				CEBD2E7B275459360016FCFD /* IOS_CheckboxView.swift */,
+				CEBD2E79275455C30016FCFD /* IOS_TaskAddView.swift */,
+				CEF74AB92760A5E600AC3943 /* BlurredView.swift */,
 				CED349E626E6162A00D5E9EE /* TextFieldBig.swift */,
 				CEC4BC0926E6A13700692007 /* TextFieldSmall.swift */,
+				CEAEF1752766198400109F55 /* FirstResponderTextField.swift */,
+				CEAEF17727661B1C00109F55 /* FirstResponderTextView.swift */,
 				CED349E826E616F600D5E9EE /* TextEditor.swift */,
 				CE068B3426D83DE000E82573 /* KeyboardResponder.swift */,
 				CE068B3726D83EC600E82573 /* AboveKeyboardView.swift */,
@@ -538,21 +572,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE17B2652762C4A40055B415 /* PopupModifier.swift in Sources */,
 				CE068B0526D587A300E82573 /* EntityType.swift in Sources */,
 				CE2E671326C9B4A600AB6282 /* ScreenFactory.swift in Sources */,
 				CE068B3826D83EC600E82573 /* AboveKeyboardView.swift in Sources */,
 				CE068B1826D5AE1300E82573 /* AppState+Downcasting.swift in Sources */,
-				CED0438826C93C9D00B7D003 /* TabBar.swift in Sources */,
 				CED0435726C93C7C00B7D003 /* NavigationBarModifier.swift in Sources */,
 				CE068B3526D83DE000E82573 /* KeyboardResponder.swift in Sources */,
 				CE481C5A26E9833A001F838E /* Color+Extensions.swift in Sources */,
 				CED349E926E616F600D5E9EE /* TextEditor.swift in Sources */,
 				CEC4BC0E26E6CC7C00692007 /* Project_CD+CoreDataProperties.swift in Sources */,
+				CEBB6A1127616BFA005CD291 /* IOS_CustomTabbar.swift in Sources */,
 				CED0435D26C93C8300B7D003 /* NavigationController.swift in Sources */,
-				CE163C1726EFFD5A00DA1323 /* TestViewNewDesign.swift in Sources */,
+				CEAEF17827661B1C00109F55 /* FirstResponderTextView.swift in Sources */,
+				CEBD2E80275462290016FCFD /* IOS_GeneralActionsView.swift in Sources */,
 				CED0438026C93C9800B7D003 /* IOS_ProjectDetailsScreen.swift in Sources */,
 				CED043BB26C93CE200B7D003 /* MAC_InputsList.swift in Sources */,
 				CE324AA826CDA7060029B2C4 /* CoreDataManager.swift in Sources */,
+				CEAEF1762766198400109F55 /* FirstResponderTextField.swift in Sources */,
+				CEAEF17227653E5C00109F55 /* IOS_NewTaskView.swift in Sources */,
 				CED0434B26C93C6300B7D003 /* FilledButtonStyle.swift in Sources */,
 				CED0436C26C93C8800B7D003 /* StackScreenViewController.swift in Sources */,
 				CED0438426C93C9800B7D003 /* IOS_ProjectsScreen.swift in Sources */,
@@ -561,7 +599,9 @@
 				CED0433F26C93C5800B7D003 /* AppState.swift in Sources */,
 				CEC4BC0A26E6A13700692007 /* TextFieldSmall.swift in Sources */,
 				CED0435526C93C7C00B7D003 /* NavigationBar.swift in Sources */,
+				CEBD2E7E27545E5F0016FCFD /* IOS_ProjectSubitemView.swift in Sources */,
 				CED0435F26C93C8300B7D003 /* InboxNavigationController.swift in Sources */,
+				CE6068F0276E3FF200D4BF1A /* Haptic.swift in Sources */,
 				CED043AB26C93CDB00B7D003 /* Models.swift in Sources */,
 				CEC4BC0D26E6CC7C00692007 /* Task_CD+CoreDataProperties.swift in Sources */,
 				CE2E671426C9B4B800AB6282 /* IOS_InputDetailsScreen.swift in Sources */,
@@ -571,12 +611,14 @@
 				CED0438A26C93C9D00B7D003 /* IOS_SType.swift in Sources */,
 				CED0434926C93C6300B7D003 /* Container.swift in Sources */,
 				CED0437226C93C9000B7D003 /* IOS_Router.swift in Sources */,
+				CE52F139275069AF00B1B461 /* StateTypes.swift in Sources */,
 				CED0436326C93C8300B7D003 /* ProjectNavigationController.swift in Sources */,
 				CE2BF6E926D3CF3A00743E81 /* Project_CD+CoreDataClass.swift in Sources */,
 				CE2E670D26C9B3CE00AB6282 /* InputInteractor.swift in Sources */,
 				CE068B0B26D589B300E82573 /* DateManager.swift in Sources */,
 				CED0434726C93C6300B7D003 /* CurrentValueSubject+Extensions.swift in Sources */,
 				CED0436826C93C8800B7D003 /* Strategy.swift in Sources */,
+				CEBD2E7A275455C30016FCFD /* IOS_TaskAddView.swift in Sources */,
 				CED0437026C93C9000B7D003 /* StackAction.swift in Sources */,
 				CE068B1626D5AD7400E82573 /* IOSScreen.swift in Sources */,
 				CED0437E26C93C9800B7D003 /* IOS_TaskDetailsScreen.swift in Sources */,
@@ -584,12 +626,15 @@
 				CE2E66F826C919E800AB6282 /* ContentView.swift in Sources */,
 				CE2BF6E526D3CF3A00743E81 /* Task_CD+CoreDataClass.swift in Sources */,
 				CE068B2926D6E3A700E82573 /* IOS_ProjectRow.swift in Sources */,
+				CE6068F2276E6F0600D4BF1A /* Icon.swift in Sources */,
 				CED0436126C93C8300B7D003 /* TaskNavigationController.swift in Sources */,
 				CE068B0826D587DE00E82573 /* Array+Extension.swift in Sources */,
 				CE06432826EC087200073706 /* Interactor.swift in Sources */,
+				CEBD2E7C275459360016FCFD /* IOS_CheckboxView.swift in Sources */,
 				CE2E671626C9B52A00AB6282 /* Trening_icloud3.swift in Sources */,
 				CE068B3C26D9620300E82573 /* IOS_ToolView.swift in Sources */,
 				CED0435126C93C6300B7D003 /* CustomtextfieldStyle.swift in Sources */,
+				CEF74ABA2760A5E600AC3943 /* BlurredView.swift in Sources */,
 				CED043B126C93CDB00B7D003 /* Interactor+Tasks.swift in Sources */,
 				CED0438226C93C9800B7D003 /* IOS_InboxScreen.swift in Sources */,
 				CED349E726E6162A00D5E9EE /* TextFieldBig.swift in Sources */,
@@ -633,6 +678,7 @@
 				CE481D1226EABCAD001F838E /* MAC_ProjectDetailsScreen.swift in Sources */,
 				CED0439526C93CAB00B7D003 /* MAC_MiddleBarScreen.swift in Sources */,
 				CEEB8FC327329B2B00F4E36A /* AccessibilityIdentifiers.swift in Sources */,
+				CE52F13A275069AF00B1B461 /* StateTypes.swift in Sources */,
 				CE2E66F926C919E800AB6282 /* ContentView.swift in Sources */,
 				CED0435226C93C6300B7D003 /* CustomtextfieldStyle.swift in Sources */,
 				CED043B226C93CDB00B7D003 /* Interactor+Tasks.swift in Sources */,
@@ -882,7 +928,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = RKV664A9KV;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -907,7 +953,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = RKV664A9KV;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

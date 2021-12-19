@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-protocol TasksAppStateProtocol {// tutaj do oddzielnych plikow
+protocol TasksAppStateProtocol {
 
     var tasksSubject: CurrentValueSubject<[Task], Never> { get }
     var syncTimeSubject: PassthroughSubject<String?, Never> { get }
@@ -34,13 +34,45 @@ protocol ProjectsAppStateProtocol {
     var syncTimeSubject: PassthroughSubject<String?, Never> { get }
 
     func getCurrentProject() -> Project?
+    func getNextActions() -> [Task]
+    func getWaitingFors() -> [Task]
+    func getNotes() -> String
 
 }
 
 extension ProjectsAppStateProtocol {
     
     func getCurrentProject() -> Project? {
-        projectsSubject.value.first { $0.id == currentProjectID }
+        projectsSubject.value
+            .first { $0.id == currentProjectID }
+    }
+
+    func getCurrentProject() -> AnyPublisher<Project, Never> {
+        projectsSubject
+            .compactMap { projects in
+                projects.first { project in
+                    project.id == currentProjectID
+                }
+            }
+            .compactMap { $0 }
+            .eraseToAnyPublisher()
+    }
+
+    func getNotes() -> String {
+        projectsSubject.value
+            .first { $0.id == currentProjectID }?.description ?? ""
+    }
+
+    func getNextActions() -> [Task] {
+        projectsSubject.value
+            .first { $0.id == currentProjectID }?.tasks
+            .filter { $0.taskType == TaskType.nextAction.name } ?? []
+    }
+
+    func getWaitingFors() -> [Task] {
+        projectsSubject.value
+            .first { $0.id == currentProjectID }?.tasks
+            .filter { $0.taskType == TaskType.waitingFor.name } ?? []
     }
     
 }

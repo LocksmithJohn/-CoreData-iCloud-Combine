@@ -19,6 +19,7 @@ extension Task_CD {
     @NSManaged public var id: UUID?
     @NSManaged public var name: String?
     @NSManaged public var taskDescription: String?
+    @NSManaged public var taskType: String?
     @NSManaged public var origin: Project_CD?
 
 }

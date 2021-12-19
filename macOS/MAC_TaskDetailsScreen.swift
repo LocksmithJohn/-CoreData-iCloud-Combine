@@ -47,7 +47,7 @@ struct MAC_TaskDetailsScreen: View {
             .padding()
             .onChange(of: taskDescription) { value in
                 if taskDescription.isEmpty {
-                    placeholder = "Tutaj opis..."
+                    placeholder = " opis..."
                 } else {
                     placeholder = ""
                 }
@@ -91,18 +91,10 @@ struct MAC_TaskDetailsScreen: View {
         switch route {
         case .tasks(.editing):
             if let id = appState.currentTaskID {
-                let newTask = Task(id: id,
-                                   name: taskName,
-                                   description: taskDescription,
-                                   parentProject: "")
-                interactor?.edit(id: newTask.id, newTask: newTask)
+                interactor?.editCurrentTask(name: taskName, type: nil)
             }
         default:
-            let newTask = Task(id: UUID(),
-                               name: taskName,
-                               description: taskDescription,
-                               parentProject: "")
-            interactor?.add(task: newTask)
+            interactor?.add(name: taskName, description: taskDescription)
         }
     }
     

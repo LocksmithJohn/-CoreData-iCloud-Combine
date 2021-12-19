@@ -34,5 +34,6 @@ struct IOS_InboxScreen: IOSScreen {
         .modifier(NavigationBarModifier(type.title,
                                         mainColor: .inboxColor,
                                         identifier: .screenTitleInbox))
+        .background(Color.backgroundMain.ignoresSafeArea())
     }
 }

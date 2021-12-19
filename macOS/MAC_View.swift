@@ -17,7 +17,7 @@ struct MAC_View: View {
             MAC_MiddleBarScreen(container: container)
             MAC_CanvasScreen(appState: container.appState,
                              router: container.router,
-                             interactor: container.interactor)//tutajj nie moze wjechac tasksInteractor
+                             interactor: container.interactor)
         }
         .toolbar {
             MAC_ToolbarView().environmentObject(container)

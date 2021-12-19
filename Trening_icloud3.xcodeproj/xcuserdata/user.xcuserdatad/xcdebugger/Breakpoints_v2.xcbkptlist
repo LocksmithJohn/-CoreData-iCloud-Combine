@@ -7,79 +7,31 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4FAEC475-36BF-4477-9FF1-0F42ADFF6621"
+            uuid = "3B4EBC48-D85D-421E-BE4F-1BBFB7984271"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "macOS/MAC_Router.swift"
+            filePath = "iOS/IOS_TaskDetailsScreen.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
-            landmarkName = "MAC_Router"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  uuid = "4FAEC475-36BF-4477-9FF1-0F42ADFF6621 - 2d47acf9e62fa654"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Trening_icloud3.MAC_Router.__allocating_init() -&gt; Trening_icloud3.MAC_Router"
-                  moduleName = "Trening_icloud3"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/user/Developer/OtherRepos/Trening_icloud3/macOS/MAC_Router.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "32">
-               </Location>
-               <Location
-                  uuid = "4FAEC475-36BF-4477-9FF1-0F42ADFF6621 - ccddfcab33a36553"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Trening_icloud3.MAC_Router.init() -&gt; Trening_icloud3.MAC_Router"
-                  moduleName = "Trening_icloud3"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/user/Developer/OtherRepos/Trening_icloud3/macOS/MAC_Router.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "52">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0B8C17DC-D9C4-462E-82A9-8585F095D8D7"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iOS/IOS_Router.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "route(from:strategy:)"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "fillInitialData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "90DFE780-5771-42BA-915E-1EF836E0E0DD"
+            uuid = "AF158A7F-8157-4770-9E7D-6CC42DAE30CC"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "macOS/MAC_TasksList.swift"
+            filePath = "iOS/IOS_TaskDetailsScreen.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -87,32 +39,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3CCA8C28-998A-4B15-93E8-7E33086E5C9E"
+            uuid = "82790EC4-A811-4D5C-94FB-F6586657D5D7"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "UITests_iOS/Tests/UITestsBasicNavigation.swift"
+            filePath = "iOS/IOS_TaskDetailsScreen.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "testScreensOnTabs()"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "fillInitialData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "620AC150-608A-4A58-98D3-2129E64FE023"
+            uuid = "58D07EB5-EFDA-4869-A90E-F53B189D1405"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "UITests_iOS/Tests/UITestsBasicNavigation.swift"
+            filePath = "iOS/IOS_ProjectDetailsScreen.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "testScreensOnTabs()"
+            startingLineNumber = "283"
+            endingLineNumber = "283"
+            landmarkName = "updateSectionsVisibility()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EF031FC4-4F15-4457-9579-62D38DB18F76"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iOS/IOS_ProjectDetailsScreen.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
+            landmarkName = "fillInitialData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

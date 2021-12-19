@@ -31,18 +31,21 @@ extension CoreDataManager {
             task_cd.id = $0.id
             task_cd.name = $0.name
             task_cd.taskDescription = $0.description
-            project_cd.addToTask(task_cd)//tutaj jak dodac task do projektu
+            project_cd.addToTask(task_cd)
         }
         saveContext()
     }
     
     func addTaskToProject(projectID: UUID, task: Task) {
         guard let gotProject = getProject(id: projectID) else {
-            return // tutaj error
+            return // TODO: error
         }
         var editedProject = gotProject
         editedProject.tasks.append(task)
-        editProject(id: projectID, newProject: editedProject)
+        editProject(id: projectID,
+                    newName: editedProject.name,
+                    newDescription: editedProject.description,
+                    newTasks: editedProject.tasks)
     }
     
     // MARK: - Get actions
@@ -68,32 +71,75 @@ extension CoreDataManager {
     
     // MARK: - Edit actions
     
-    func editProject(id: UUID, newProject: Project) {
+    func editProject(id: UUID,
+                     newName: String? = nil,
+                     newDescription: String? = nil,
+                     newTasks: [Task]? = nil) {
         let request: NSFetchRequest<Project_CD> = Project_CD.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", id.uuidString)
 
         if let project_cd = try? managedContext.fetch(request).first {
-            project_cd.name = newProject.name
-            project_cd.projectDescription = newProject.description
-            newProject.tasks.forEach {
-                guard !(project_cd.tasks.map { $0.id }).contains($0.id) else { return }
-                
-                let task_cd = Task_CD(context: managedContext)
-                task_cd.id = $0.id  
-                task_cd.name = $0.name
-                task_cd.taskDescription = $0.description
-                project_cd.addToTask(task_cd)//tutaj filtrować
+            if let newName = newName {
+                project_cd.name = newName
+            }
+            if let newDescription = newDescription {
+                project_cd.projectDescription = newDescription
+            }
+            if let newTasks = newTasks {
+                newTasks.forEach {
+                    guard !(project_cd.tasks.map { $0.id }).contains($0.id) else { return }
+
+                    let task_cd = Task_CD(context: managedContext)
+                    task_cd.id = $0.id
+                    task_cd.name = $0.name
+                    task_cd.taskDescription = $0.description
+                    task_cd.taskType = $0.taskType
+                    project_cd.addToTask(task_cd)
+                }
             }
             saveContext()
         }
     }
+
+    func editTaskInProject(projectId: UUID,
+                           taskId: UUID,
+                           taskName: String? = nil,
+                           taskDescription: String? = nil,
+                           taskType: TaskType? = nil) {
+        let request: NSFetchRequest<Project_CD> = Project_CD.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", projectId.uuidString)
+
+        if let project_cd = try? managedContext.fetch(request).first {
+            project_cd.tasks_cd.forEach {
+                if $0.id == taskId {
+                    editTask(id: taskId,
+                             taskName: taskName,
+                             taskDescription: taskDescription,
+                             taskType: taskType?.name)
+                }
+            }
+            project_cd.name = project_cd.name // TODO: zrefaktorowac to. nazwa projektu jest zmieniona tylko po to aby odswiezyc subject projektowy
+            saveContext()
+        }
+    }
     
-    func editTask(id: UUID, newTask: Task) {
+    func editTask(id: UUID,
+                  taskName: String? = nil,
+                  taskDescription: String? = nil,
+                  taskType: String? = nil) {
         let request: NSFetchRequest<Task_CD> = Task_CD.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", id.uuidString)
 
         if let task_cd = try? managedContext.fetch(request).first {
-            task_cd.setValue(newTask.name, forKey: "name")
+            if let newName = taskName {
+                task_cd.setValue(newName, forKey: "name")
+            }
+            if let newType = taskType {
+                task_cd.setValue(newType, forKey: "taskType")
+            }
+            if let newDescription = taskDescription {
+                task_cd.setValue(newDescription, forKey: "taskDescription")
+            }
             saveContext()
         }
     }

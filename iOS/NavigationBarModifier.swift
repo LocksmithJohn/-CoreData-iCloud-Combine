@@ -10,26 +10,26 @@ import SwiftUI
 struct NavigationBarModifier: ViewModifier {
     
     let title: String?
-    let leftButtonImage: Image?
+    let leftImageView: AnyView?
     let leftButtonAction: (() -> Void)?
-    let rightButtonImage: Image?
+    let rightImageView: AnyView?
     let rightButtonAction: (() -> Void)?
     let syncDate: Binding<String?>?
     let mainColor: Color
     let identifier: Identifier
     
     init(_ title: String? = nil,
-         leftButtonImage: Image? = nil,
+         leftImageView: AnyView? = nil,
          leftButtonAction: (() -> Void)? = nil,
-         rightButtonImage: Image? = nil,
+         rightImageView: AnyView? = nil,
          rightButtonAction: (() -> Void)? = nil,
          syncDate: Binding<String?>? = nil,
          mainColor: Color = .white,
          identifier: Identifier) {
         self.title = title
-        self.leftButtonImage = leftButtonImage
+        self.leftImageView = leftImageView
         self.leftButtonAction = leftButtonAction
-        self.rightButtonImage = rightButtonImage
+        self.rightImageView = rightImageView
         self.rightButtonAction = rightButtonAction
         self.syncDate = syncDate
         self.mainColor = mainColor
@@ -40,9 +40,9 @@ struct NavigationBarModifier: ViewModifier {
         VStack {
             NavigationBar(syncDate: syncDate ?? .constant(nil),
                           title: title,
-                          leftButtonImage: leftButtonImage,
+                          leftImageView: leftImageView,
                           leftButtonAction: leftButtonAction,
-                          rightButtonImage: rightButtonImage,
+                          rightImageView: rightImageView,
                           rightButtonAction: rightButtonAction,
                           mainColor: mainColor,
                           identifier: identifier)

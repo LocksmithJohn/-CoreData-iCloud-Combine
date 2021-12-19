@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ScreenFactory {
     static func make(type: IOS_SType, container: Container) -> AnyView {
+        handleTabbarVisibility(sType: type, container: container)
         switch type {
         case .tasks:
             return AnyView(IOS_TasksScreen(appState: container.appState,
@@ -23,14 +24,24 @@ struct ScreenFactory {
                                            appState: container.appState,
                                            router: container.routerInbox))
         case .taskDetails:
-            return AnyView(IOS_TaskDetailsScreen().environmentObject(container))
+            return AnyView(IOS_TaskDetailsScreen(interactor: container.interactor,
+                                                 appState: container.appState,
+                                                 type: .taskDetails,
+                                                 router: container.routerTasks))
+        case .taskCreate:
+            return AnyView(IOS_TaskDetailsScreen(interactor: container.interactor,
+                                                 appState: container.appState,
+                                                 type: .taskCreate,
+                                                 router: container.routerTasks))
         case .projectDetails:
-            return AnyView(IOS_ProjectDetailsScreen(interactor: container.interactor,
+            return AnyView(IOS_ProjectDetailsScreen(projectsInteractor: container.interactor,
+                                                    tasksInteractor: container.interactor,
                                                     appState: container.appState,
                                                     type: .projectDetails,
                                                     router: container.routerProjects))
         case .projectCreate:
-            return AnyView(IOS_ProjectDetailsScreen(interactor: container.interactor,
+            return AnyView(IOS_ProjectDetailsScreen(projectsInteractor: container.interactor,
+                                                    tasksInteractor: container.interactor,
                                                     appState: container.appState,
                                                     type: .projectCreate,
                                                     router: container.routerProjects))
@@ -38,5 +49,20 @@ struct ScreenFactory {
             return AnyView(IOS_InputDetailsScreen().environmentObject(container))
         }
     }
-    
+
+    static func handleTabbarVisibility(sType: IOS_SType, container: Container) {
+        var visible: Bool {
+            switch sType {
+            case .tasks,
+                    .projects,
+                    .inbox:
+                return true
+            default:
+                return false
+            }
+        }
+//    TODO: - obsluzyc tabbar jak bedzie czas
+//        container.appState.isTabbarVisibleSubject.send(visible)
+    }
+
 }

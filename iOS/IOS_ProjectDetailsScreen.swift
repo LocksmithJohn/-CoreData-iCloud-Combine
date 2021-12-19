@@ -5,164 +5,256 @@
 //  Created by User on 03/08/2021.
 //
 
+import Combine
 import SwiftUI
 
 struct IOS_ProjectDetailsScreen: IOSScreen {
-    
+
+    var type: IOS_SType
+
     @State private var projectName: String = ""
     @State private var projectDescription: String = ""
     @State private var tasks: [Task] = []
-    @State private var addingTaskName: String = ""
-    
-    var type: IOS_SType
-    
+    @State private var nextActions: [Task] = []
+    @State private var waitingFors: [Task] = []
+    @State private var isSettingsPopupVisible: Bool = false
+    @State private var isEditThingViewVisible: Bool = false
+    @State private var taskTypeTag = 0
+    @State private var newThingName: String = ""
+    @State private var tappedTaskID: UUID?
+    @State private var isTaskInputMode = false
+
     private let appState: ProjectsAppStateProtocol
     private let projectsInteractor: ProjectsInteractorProtocol?
+    private let tasksInteractor: TasksInteractorProtocol?
     private let router: IOS_Router
     private let placeholder = "Project name..."
+
+    private var projectPublisher: AnyPublisher<Project, Never> {
+        appState.getCurrentProject()
+    }
+
+    @State private var isTaskSectionVisible = false
+    @State private var isWaitForSectionVisible = false
+    @State private var isNextTaskSetionVisible = false
+    @State private var isNotesSetionVisible = false
     
-    init(interactor: InteractorProtocol,
+    init(projectsInteractor: InteractorProtocol,
+         tasksInteractor: InteractorProtocol,
          appState: ProjectsAppStateProtocol,
          type: IOS_SType,
          router: IOS_Router) {
-        self.projectsInteractor = interactor as? ProjectsInteractorProtocol
+        self.projectsInteractor = projectsInteractor as? ProjectsInteractorProtocol
+        self.tasksInteractor = tasksInteractor as? TasksInteractorProtocol
         self.appState = appState
         self.type = type
         self.router = router
     }
-    
+
     var body: some View {
-        VStack {
-            ZStack {
-                HStack {
-                    Text("•")
-                        .font(.system(size: 30))
-                        .padding(.leading, 16)
-                        .foregroundColor(.projectColor)
-                    TextFieldBig(inputText: $projectName, placeholder: placeholder)
-                }
-                TextEditorDefault(inputText: $projectDescription)
-                    .frame(height: 60)
-                VStack {
-                    tasksList
-                    addTaskView
-                }
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(10)
-                Spacer()
-                buttonBar
-                
-                if #available(iOS 15.0, *) {
-                    VStack {
-                        HStack(spacing: 8) {
-                            Image(systemName: "tray.and.arrow.down")
-                            Text("Inbox")
-                            Spacer()
-                        }
-                        .padding(.leading, 24)
-                        .frame(height: 40)
-                        .background(Color.orange)
-                        TextField("type here", text: .constant("asdaf"))
-                        Spacer()
-                        HStack(spacing: 8) {
-
-                            Spacer()
-                        }
-                        .frame(height: 40)
-
-                        .background(Color.orange)
-                    }
-//                    .padding()
-//                    .frame(width: 300, height: 300)
-                    .cornerRadius(20)
-                    .background(.regularMaterial)
-                    .cornerRadius(20)
-                } else {
-                    Text("not ios 15")
+        ZStack(alignment: .top) {
+            VStack {
+                titleView
+                    .padding(.horizontal, 16)
+                scrollView
+                if type == .projectCreate {
+                    buttonBar
+                        .padding(.horizontal, 16)
                 }
             }
+            if isSettingsPopupVisible { settingsPopup }
+            if isEditThingViewVisible { editThigPopup }
         }
-        .padding()
         .modifier(NavigationBarModifier(type.title,
-                                        leftButtonImage: Image(systemName: "arrowshape.turn.up.backward"),
-                                        leftButtonAction: { router.pop() },
+                                        leftImageView: AnyView(leftImage),
+                                        leftButtonAction: {
+            projectsInteractor?.setCurrentProject(id: nil)
+            router.pop()
+        },
+                                        rightImageView: AnyView(rightImage),
+                                        rightButtonAction: { isSettingsPopupVisible.toggle() },
                                         mainColor: .projectColor,
                                         identifier: .screenTitleProjectDetails))
-        .onAppear { fillInData() }
+        .onReceive(projectPublisher, perform: { update(tasks: $0.tasks) })
+        .onAppear { fillInitialData() }
+        .background(Color.backgroundMain.ignoresSafeArea())
     }
-    
-    private var addTaskView: some View {
-        HStack {
-            TextFieldSmall(inputText: $addingTaskName, placeholder: "Add task")
-            Button(action: {
-                let task = Task(id: UUID(), name: addingTaskName, description: "-", parentProject: "|")
-                tasks.append(task)
-                addingTaskName = ""
-            }, label: {
-                Image(systemName: "plus.square")
-                    .font(.system(size: 28))
-                    .foregroundColor(.projectColor)
-                    .padding()
-            })
-        }
+
+    // MARK: - Subviews
+
+    private var leftImage: some View {
+        Image.back.with(.medium, .projectColor)
     }
-    
-    private var tasksList: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading) {
-                ForEach(tasks) { task in
-                    HStack(alignment: .center) {
-                        Text("•")
-                            .font(.system(size: 30))
-                            .padding(.leading, 16)
-                            .foregroundColor(.taskColor)
-                        Text(task.name).padding()
-                        Spacer()
-                    }
-                    .padding(.leading, 16)
+
+    private var rightImage: some View {
+        Image.plus.with(.small, .projectColor)
+    }
+
+    private var scrollView: some View {
+        ScrollViewReader { scrollView in
+            ScrollView(showsIndicators: false) {
+                scrollContent
+            }
+            .onChange(of: isTaskInputMode) { isInputMode in
+                if isInputMode {
+                    withAnimation { scrollView.scrollTo(101, anchor: .zero) }
                 }
             }
         }
     }
+
+    private var scrollContent: some View {
+        VStack(spacing: 16) {
+            if isNotesSetionVisible {
+                notesView
+            }
+            if isNextTaskSetionVisible {
+                nextActionsView
+            }
+            if isWaitForSectionVisible {
+                waitingForsView
+            }
+            if isTaskSectionVisible {
+                tasksView
+                IOS_NewTaskView(isInputMode: $isTaskInputMode,
+                                projectsInteractor: projectsInteractor).id(101)
+            }
+
+        }
+        .padding()
+    }
+
+    private var titleView: some View {
+        HStack(spacing: 0) {
+            IOS_CheckboxView(tapAction: {},
+                             checkboxSize: .big)
+            TextFieldBig(inputText: $projectName, placeholder: placeholder)
+            Spacer()
+        }
+    }
+
+    private var notesView: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if !projectDescription.isEmpty {
+                HStack {
+                    Text("Notes")
+                        .foregroundColor(.gray)
+                    Spacer()
+                }
+                TextEditorDefault(inputText: $projectDescription)
+                    .offset(x: -3)
+            }
+        }
+    }
+
+    private var settingsPopup: some View {
+        IOS_GeneralActionsView(
+            title: nil,
+            items:
+                [
+                    (title: "Add task", action: {
+                        print("filter tutaj action")
+                        isTaskInputMode = true
+                        isTaskSectionVisible = true
+                        Haptic.impact(.light)
+                    }),
+                    (title: "Add file", action: { print("filter tutaj action") }),
+                    (title: "Add notes", action: { print("filter tutaj action") }),
+                    (title: "Delete project", action: {
+                        deleteProject()
+                        router.pop()
+                    }),
+                ],
+            closeAction: { isSettingsPopupVisible = false })
+    }
+
+    private var editThigPopup: some View {
+        IOS_GeneralActionsView(
+            title: "Move to",
+            items:[
+                (title: "Tasks", action: {
+                    projectsInteractor?.editTypeInTaskInCurrentProject(taskId: tappedTaskID, taskType: TaskType.task)
+                    isEditThingViewVisible = false
+                }),
+                (title: "Next actions", action: {                                     projectsInteractor?.editTypeInTaskInCurrentProject(taskId: tappedTaskID, taskType: .nextAction)
+                    isEditThingViewVisible = false}),
+                (title: "Wait for", action: {                                     projectsInteractor?.editTypeInTaskInCurrentProject(taskId: tappedTaskID, taskType: .waitingFor)
+                    isEditThingViewVisible = false})
+            ], closeAction: {
+                isEditThingViewVisible = false
+            }
+        )
+    }
+
+    private var nextActionsView: some View {
+        IOS_ProjectSubitemView(title: "Next actions",
+                               items: nextActions.map { ($0.id, $0.name) }) { id in
+            isEditThingViewVisible = true
+            tappedTaskID = id
+        }
+    }
+
+    private var waitingForsView: some View {
+        IOS_ProjectSubitemView(title: "Waiting for",
+                               items: waitingFors.map { ($0.id, $0.name) }) { id in
+            isEditThingViewVisible = true
+            tappedTaskID = id
+        }
+    }
     
-    private var buttonBar: some View {
-        HStack {
+    private var tasksView: some View {
+            IOS_ProjectSubitemView(title: "Tasks",
+                                   items: tasks.map { ($0.id, $0.name) }) { id in
+                isEditThingViewVisible = true
+                tappedTaskID = id}
+    }
+    
+    @ViewBuilder private var buttonBar: some View {
             Button {
                 saveAction()
                 router.pop()
-            } label: { Text("Save") }
+            } label: {
+                Text("Save")
+            }
             .buttonStyle(FilledButtonStyle(color: Color.projectColor))
-            Button {
-                projectsInteractor?.deleteCurrentProject()
-                router.pop()
-            } label: { Text("Delete") }
-            .buttonStyle(BorderedButtonStyle(color: Color.projectColor))
-        }
     }
-    
+
+    // MARK: - Methods
+
     private func saveAction() {
         actions {
             projectsInteractor?.add(newName: projectName,
-                           newDescription: projectDescription,
-                           newTasks: tasks)
+                                    newDescription: projectDescription,
+                                    newTasks: tasks)
         } editing: {
-            projectsInteractor?.editProject(newName: projectName,
-                                   newDescription: projectDescription,
-                                   newTasks: tasks)
+            projectsInteractor?.editCurrentProject(newName: projectName,
+                                                   newDescription: projectDescription,
+                                                   newTasks: tasks)
         }
-        
     }
-    
-    private func fillInData() {
-        actions(editing:  {
-            if let existingProject = appState.getCurrentProject() {
-                projectName = existingProject.name
-                projectDescription = existingProject.description ?? ""
-                tasks = existingProject.tasks
-            }
-        })
+
+    private func deleteProject() {
+        projectsInteractor?.deleteCurrentProject()
     }
-    
+
+    private func deleteTappedTask() {
+        if let id = tappedTaskID {
+            tasksInteractor?.deleteTask(id: id)
+        }
+    }
+
+    private func fillInitialData() {
+        actions {
+            guard let existingProject = appState.getCurrentProject() else { return }
+            projectName = existingProject.name
+            projectDescription = existingProject.description ?? ""
+            nextActions = appState.getNextActions()
+            waitingFors = appState.getWaitingFors()
+            projectDescription = appState.getNotes()
+            tasks = existingProject.tasks
+        }
+    }
+
     private func actions(creating: (() -> Void)? = nil,
                          editing: (() -> Void)? = nil) {
         switch type {
@@ -174,5 +266,24 @@ struct IOS_ProjectDetailsScreen: IOSScreen {
             break
         }
     }
-    
+
+    private func update(tasks: [Task]) {
+        self.tasks = tasks
+            .filter {
+                $0.taskType != TaskType.waitingFor.name &&
+                $0.taskType != TaskType.nextAction.name
+            }
+        nextActions = appState.getNextActions()
+        waitingFors = appState.getWaitingFors()
+        projectDescription = appState.getNotes()
+        updateSectionsVisibility()
+    }
+
+    private func updateSectionsVisibility() {
+        isTaskSectionVisible = !tasks.isEmpty || isTaskInputMode
+        isNotesSetionVisible = !projectDescription.isEmpty
+        isWaitForSectionVisible = !waitingFors.isEmpty
+        isNextTaskSetionVisible = !nextActions.isEmpty
+    }
+
 }

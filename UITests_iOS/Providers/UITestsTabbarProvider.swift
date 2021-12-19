@@ -14,7 +14,8 @@ struct UITestsTabbarProvider: UITestProviderProtocol {
 
     @discardableResult
     func tapInboxTab() -> Self {
-        let button = app.buttons["tab inbox"]
+        app.debugPrint()
+        let button = app.buttons[Identifier.tabBarTabInbox.rawValue]
         XCTAssertTrue(button.waitForExistence(timeout: 3))
         button.tap()
         return self
@@ -22,7 +23,7 @@ struct UITestsTabbarProvider: UITestProviderProtocol {
     
     @discardableResult
     func tapTasksTab() -> Self {
-        let button = app.buttons["tab tasks"]
+        let button = app.buttons[Identifier.tabBarTabTasks.rawValue]
         XCTAssertTrue(button.waitForExistence(timeout: 3))
         button.tap()
         app.debugPrint()
@@ -31,7 +32,7 @@ struct UITestsTabbarProvider: UITestProviderProtocol {
 
     @discardableResult
     func tapProjectsTab() -> Self {
-        let button = app.buttons["tab projects"] // TODO: write ids properly
+        let button = app.buttons[Identifier.tabBarTabProjects.rawValue]
         XCTAssertTrue(button.waitForExistence(timeout: 3))
         button.tap()
         return self
