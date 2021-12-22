@@ -11,6 +11,7 @@ struct Project: Equatable, Identifiable, Hashable {
     var id: UUID
     var name: String = ""
     var description: String? = nil
+    var status: ProjectStatus
     var tasks: [Task]
 }
 
@@ -29,6 +30,7 @@ extension Project {
         self.name = project_cd.name ?? ""
         self.description = project_cd.projectDescription
         self.id = id
+        self.status = ProjectStatus(rawValue: project_cd.status) ?? .done
         self.tasks = project_cd.tasks
     }
 }
@@ -38,6 +40,7 @@ extension Project_CD {
         self.init()
         name = project.name
         projectDescription = project.description
+        status = project.status.rawValue
     }
 }
 

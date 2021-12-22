@@ -4,6 +4,7 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="projectDescription" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
         <relationship name="task" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task_CD" inverseName="origin" inverseEntity="Task_CD"/>
     </entity>
     <entity name="Task_CD" representedClassName="Task_CD" isAbstract="YES" syncable="YES">
@@ -14,7 +15,7 @@
         <relationship name="origin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project_CD" inverseName="task" inverseEntity="Project_CD"/>
     </entity>
     <elements>
-        <element name="Project_CD" positionX="-63" positionY="0" width="128" height="89"/>
+        <element name="Project_CD" positionX="-63" positionY="0" width="128" height="104"/>
         <element name="Task_CD" positionX="-63" positionY="-18" width="128" height="14"/>
     </elements>
 </model>

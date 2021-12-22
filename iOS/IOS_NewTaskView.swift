@@ -40,7 +40,7 @@ struct IOS_NewTaskView: View {
                 .padding(.top, 8)
             VStack(spacing: 0) {
                 if isInputMode {
-                    FirstResponderTextView(text: $taskName) {
+                    FirstResponderTextView(text: $taskName) { _ in
                         isInputMode = false
                         addTask()
                     }
@@ -90,5 +90,6 @@ struct IOS_NewTaskView: View {
                         parentProject: "",
                         taskType: type.name)
         projectsInteractor?.addTaskToCurrentProject(task: task)
+        taskName = ""
     }
 }

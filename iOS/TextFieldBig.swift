@@ -16,6 +16,5 @@ struct TextFieldBig: View {
         TextField(placeholder, text: $inputText)
             .textFieldStyle(PlainTextFieldStyle())
             .font(.system(size: 30, weight: .bold, design: .rounded))
-            .padding()
     }
 }

@@ -12,23 +12,32 @@ import SwiftUI
 struct FirstResponderTextView: UIViewRepresentable {
 
     @Binding var text: String
-    let endEditingSubject: () -> Void
+    private let endEditingAction: (String) -> Void
+    private let backgroundColor: Color
+    private let textColor: Color
+    private let textSize: CGFloat
 
     init(text: Binding<String>,
-         endEditingSubject: @escaping () -> Void) {
+         textColor: Color = .white,
+         textSize: CGFloat = 18,
+         backgroundColor: Color = .objectMain,
+         endEditingAction: @escaping (String) -> Void) {
         self._text = text
-        self.endEditingSubject = endEditingSubject
+        self.textSize = textSize
+        self.endEditingAction = endEditingAction
+        self.backgroundColor = backgroundColor
+        self.textColor = textColor
     }
 
     class Coordinator: NSObject, UITextViewDelegate {
         @Binding var text: String
         var becameFirstResponder = false
-        let endEditingSubject: () -> Void
+        let endEditingAction: (String) -> Void
 
         init(text: Binding<String>,
-             textChangeSubject: @escaping () -> Void) {
+             endEditingAction: @escaping (String) -> Void) {
             self._text = text
-            self.endEditingSubject = textChangeSubject
+            self.endEditingAction = endEditingAction
         }
 
         func textViewDidChangeSelection(_ textView: UITextView) {
@@ -36,7 +45,7 @@ struct FirstResponderTextView: UIViewRepresentable {
         }
 
         func textViewDidEndEditing(_ textView: UITextView) {
-            endEditingSubject()
+            endEditingAction(textView.text)
         }
 
         func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -54,15 +63,15 @@ struct FirstResponderTextView: UIViewRepresentable {
         let textView = UITextView()
         textView.returnKeyType = .done
         textView.delegate = context.coordinator
-        textView.font = UIFont.systemFont(ofSize: 20)
-        textView.backgroundColor = .objectMain
-        textView.tintColor = .green
+        textView.font = UIFont.systemFont(ofSize: textSize)
+        textView.backgroundColor = UIColor(backgroundColor)
+        textView.tintColor = UIColor(textColor)
         textView.text = text
         return textView
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(text: $text, textChangeSubject: endEditingSubject)
+        Coordinator(text: $text, endEditingAction: endEditingAction)
     }
 
     func updateUIView(_ uiView: UIViewType, context: Context) {

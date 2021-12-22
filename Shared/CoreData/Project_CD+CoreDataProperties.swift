@@ -19,6 +19,7 @@ extension Project_CD {
     @NSManaged public var id: UUID?
     @NSManaged public var name: String?
     @NSManaged public var projectDescription: String?
+    @NSManaged public var status: String
     @NSManaged public var task: NSSet?
     
     var tasks_cd: [Task_CD] {
@@ -31,11 +32,6 @@ extension Project_CD {
     var tasks: [Task] {
         tasks_cd.compactMap { Task($0) }
     }
-//
-//    func saveTasks(_ tasks: [Task]) {
-//        let tasks_cd = tasks.map { Task_CD($0) }
-//        task = NSSet(tasks_cd)
-//    }
 
 }
 

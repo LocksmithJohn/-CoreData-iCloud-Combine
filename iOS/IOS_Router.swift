@@ -82,7 +82,6 @@ class IOS_Router: ObservableObject {
             
             // MARK: - Inbox screens flow
         case .inbox where strategy == .first:
-//            send(.push(.inputDetails))
             send(.present(.inputDetails))
             
             // MARK: - Tasks screens flow
@@ -91,7 +90,7 @@ class IOS_Router: ObservableObject {
             
             // MARK: - Projects screens flow
         case .projects where strategy == .first:
-            send(.push(.projectCreate))
+            send(.present(.projectCreate))
         case .projects where strategy == .second:
             send(.push(.projectDetails))
         default: break

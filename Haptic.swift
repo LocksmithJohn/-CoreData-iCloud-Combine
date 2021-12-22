@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class Haptic {
+public class Haptic {
     static func impact(_ style: UIImpactFeedbackGenerator.FeedbackStyle) {
         UIImpactFeedbackGenerator(style: style).impactOccurred()
     }

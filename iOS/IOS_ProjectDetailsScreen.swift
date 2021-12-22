@@ -14,6 +14,7 @@ struct IOS_ProjectDetailsScreen: IOSScreen {
 
     @State private var projectName: String = ""
     @State private var projectDescription: String = ""
+    @State private var projectStatus: ProjectStatus = .inProgress
     @State private var tasks: [Task] = []
     @State private var nextActions: [Task] = []
     @State private var waitingFors: [Task] = []
@@ -75,7 +76,9 @@ struct IOS_ProjectDetailsScreen: IOSScreen {
                                         rightButtonAction: { isSettingsPopupVisible.toggle() },
                                         mainColor: .projectColor,
                                         identifier: .screenTitleProjectDetails))
-        .onReceive(projectPublisher, perform: { update(tasks: $0.tasks) })
+        .onReceive(projectPublisher, perform: {
+            update(project: $0)
+        })
         .onAppear { fillInitialData() }
         .background(Color.backgroundMain.ignoresSafeArea())
     }
@@ -87,24 +90,26 @@ struct IOS_ProjectDetailsScreen: IOSScreen {
     }
 
     private var rightImage: some View {
-        Image.plus.with(.small, .projectColor)
+        Image.plus.with(.small, .projectColor).opacity(projectName.isEmpty ? 0 : 1)
     }
 
     private var scrollView: some View {
         ScrollViewReader { scrollView in
-            ScrollView(showsIndicators: false) {
+            ScrollView(.vertical, showsIndicators: false) {
                 scrollContent
             }
             .onChange(of: isTaskInputMode) { isInputMode in
                 if isInputMode {
                     withAnimation { scrollView.scrollTo(101, anchor: .zero) }
+                } else {
+
                 }
             }
         }
     }
 
     private var scrollContent: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 18) {
             if isNotesSetionVisible {
                 notesView
             }
@@ -125,10 +130,19 @@ struct IOS_ProjectDetailsScreen: IOSScreen {
     }
 
     private var titleView: some View {
-        HStack(spacing: 0) {
+        HStack(alignment: .top, spacing: 0) {
             IOS_CheckboxView(tapAction: {},
                              checkboxSize: .big)
-            TextFieldBig(inputText: $projectName, placeholder: placeholder)
+                .padding(.top, 6)
+            VStack(alignment: .leading) {
+                TextFieldBig(inputText: $projectName,
+                             placeholder: placeholder)
+                    .padding(.leading, 3)
+                StatusView(actualStatus: $projectStatus,
+                           isEditingAllowed: true,
+                           interactor: projectsInteractor)
+            }
+            .padding(.leading, 8)
             Spacer()
         }
     }
@@ -153,7 +167,6 @@ struct IOS_ProjectDetailsScreen: IOSScreen {
             items:
                 [
                     (title: "Add task", action: {
-                        print("filter tutaj action")
                         isTaskInputMode = true
                         isTaskSectionVisible = true
                         Haptic.impact(.light)
@@ -225,11 +238,13 @@ struct IOS_ProjectDetailsScreen: IOSScreen {
         actions {
             projectsInteractor?.add(newName: projectName,
                                     newDescription: projectDescription,
-                                    newTasks: tasks)
+                                    newTasks: tasks,
+                                    status: projectStatus)
         } editing: {
             projectsInteractor?.editCurrentProject(newName: projectName,
                                                    newDescription: projectDescription,
-                                                   newTasks: tasks)
+                                                   newTasks: tasks,
+                                                   status: projectStatus)
         }
     }
 
@@ -248,6 +263,7 @@ struct IOS_ProjectDetailsScreen: IOSScreen {
             guard let existingProject = appState.getCurrentProject() else { return }
             projectName = existingProject.name
             projectDescription = existingProject.description ?? ""
+            projectStatus = existingProject.status
             nextActions = appState.getNextActions()
             waitingFors = appState.getWaitingFors()
             projectDescription = appState.getNotes()
@@ -267,8 +283,8 @@ struct IOS_ProjectDetailsScreen: IOSScreen {
         }
     }
 
-    private func update(tasks: [Task]) {
-        self.tasks = tasks
+    private func update(project: Project) {
+        self.tasks = project.tasks
             .filter {
                 $0.taskType != TaskType.waitingFor.name &&
                 $0.taskType != TaskType.nextAction.name
@@ -276,6 +292,7 @@ struct IOS_ProjectDetailsScreen: IOSScreen {
         nextActions = appState.getNextActions()
         waitingFors = appState.getWaitingFors()
         projectDescription = appState.getNotes()
+        projectStatus = project.status
         updateSectionsVisibility()
     }
 

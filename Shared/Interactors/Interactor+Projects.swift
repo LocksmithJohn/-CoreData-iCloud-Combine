@@ -9,14 +9,17 @@ import Foundation
 
 protocol ProjectsInteractorProtocol: InteractorProtocol {
     
-    func add(newName: String, newDescription: String, newTasks: [Task])
+    func add(newName: String, newDescription: String?, newTasks: [Task], status: ProjectStatus)
     func addTaskToCurrentProject(task: Task)
 
     func deleteProject(_ id: UUID)
     func deleteCurrentProject()
     func deleteAll()
 
-    func editCurrentProject(newName: String?, newDescription: String?, newTasks: [Task]?)
+    func editCurrentProject(newName: String?,
+                            newDescription: String?,
+                            newTasks: [Task]?,
+                            status: ProjectStatus?)
     func editTypeInTaskInCurrentProject(taskId: UUID?, taskType: TaskType?)
 
     func setCurrentProject(id: UUID?)
@@ -25,10 +28,11 @@ protocol ProjectsInteractorProtocol: InteractorProtocol {
 
 extension Interactor : ProjectsInteractorProtocol {
 
-    func add(newName: String, newDescription: String, newTasks: [Task]) {
+    func add(newName: String, newDescription: String?, newTasks: [Task], status: ProjectStatus) {
         let project = Project(id: UUID(),
                               name: newName,
                               description: newDescription,
+                              status: status,
                               tasks: newTasks)
         coreDataManager.saveProject(project: project)
     }
@@ -54,12 +58,14 @@ extension Interactor : ProjectsInteractorProtocol {
     }
     
     func editCurrentProject(newName: String? = nil,
-                     newDescription: String? = nil,
-                     newTasks: [Task]? = nil) {
+                            newDescription: String? = nil,
+                            newTasks: [Task]? = nil,
+                            status: ProjectStatus? = nil) {
         if let id = appState.currentProjectID {
             coreDataManager.editProject(id: id,
                                         newName: newName,
                                         newDescription: newDescription,
+                                        status: status?.rawValue,
                                         newTasks: newTasks)
         } else { }
     }

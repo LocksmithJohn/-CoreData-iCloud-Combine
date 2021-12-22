@@ -24,7 +24,6 @@ struct CustomTextField: View {
 //                } else {
         HStack {
             TextField(placeholder, text: $inputText) { value in
-                print("filter value: \(value)")
             } onCommit: {
                 returnAction()
             }

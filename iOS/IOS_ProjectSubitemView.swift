@@ -16,7 +16,7 @@ struct IOS_ProjectSubitemView: View {
     let tappedID: (UUID) -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 10) {
             if !items.isEmpty {
                 HStack {
                     Text(title)

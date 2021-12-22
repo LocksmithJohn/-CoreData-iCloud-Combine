@@ -34,8 +34,9 @@ struct IOS_ProjectsScreen: IOSScreen {
             scrollView
             buttons
         }
-        .padding()
         .modifier(NavigationBarModifier(type.title,
+                                        rightImageView: AnyView(rightImage),
+                                        rightButtonAction: { plusButtonAction() },
                                         mainColor: .projectColor,
                                         identifier: .screenTitleProjects))
         .onReceive(projectsPublisher) { projects = $0 }
@@ -45,28 +46,36 @@ struct IOS_ProjectsScreen: IOSScreen {
     private var scrollView: some View {
         ScrollView {
             ForEach(projects, id: \.self) { project in
-                Group {
-                    IOS_ProjectRow(projectsInteractor: projectsInteractor,
-                                   project: project)
-                }
-                .onTapGesture {
-                    projectsInteractor?.setCurrentProject(id: project.id)
-                    router.route(from: type, strategy: .second)
-                }
+                IOS_ProjectRow(projectName: project.name,
+                               projectStatus: project.status)
+                    .padding(.horizontal)
+                    .padding(.bottom, 16)
+                    .onTapGesture {
+                        projectsInteractor?.setCurrentProject(id: project.id)
+                        router.route(from: type, strategy: .second)
+                    }
             }
         }
     }
 
+    private var rightImage: some View {
+        Image.plus.with(.small, .projectColor)
+    }
+
     private var buttons: some View {
         HStack {
-            Button(action: { projectsInteractor?.deleteAll() },
-                   label: { Text("Delete all") } )
-                .buttonStyle(BorderedButtonStyle(color: .projectColor))
-            Button(action: {
-                    router.route(from: type, strategy: .first)},
-                   label: { Text("Add project") })
-                .buttonStyle(FilledButtonStyle(color: .projectColor))
+            Button {
+                projectsInteractor?.deleteAll()
+            } label: {
+                Image.trash.with(.medium)
+                    .frame(width: 80, height: 80)
+            }
+            Spacer()
         }
+    }
+
+    private func plusButtonAction() {
+        router.route(from: type, strategy: .first)
     }
 
     private var projectsPublisher: AnyPublisher<[Project], Never> {

@@ -14,6 +14,7 @@ struct MAC_ProjectDetailsScreen: View {
     
     @State private var projectName: String = ""
     @State private var projectDescription: String = ""
+    @State private var projectStatus: ProjectStatus = .new
 
     @State private var route: Route = .projects(.creating)
     @State private var addingTaskName: String = ""
@@ -58,7 +59,6 @@ struct MAC_ProjectDetailsScreen: View {
                 }
             }
         })
-        
     }
 
     private var addTaskView: some View {
@@ -116,12 +116,14 @@ struct MAC_ProjectDetailsScreen: View {
     private func saveAction() {
         actions {
             projectsInteractor?.add(newName: projectName,
-                           newDescription: projectDescription,
-                           newTasks: viewModel.tasks)
+                                    newDescription: projectDescription,
+                                    newTasks: viewModel.tasks,
+                                    status: .new)
         } editing: {
             projectsInteractor?.editCurrentProject(newName: projectName,
                                    newDescription: projectDescription,
-                                   newTasks: viewModel.tasks)
+                                                   newTasks: viewModel.tasks,
+                                                   status: projectStatus)
         }
     }
     

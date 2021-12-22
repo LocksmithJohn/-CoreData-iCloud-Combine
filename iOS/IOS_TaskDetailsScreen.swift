@@ -63,7 +63,7 @@ struct IOS_TaskDetailsScreen: IOSScreen {
 
     private var titleView: some View {
         HStack(spacing: 0) {
-            FirstResponderTextView(text: $taskName) {
+            FirstResponderTextView(text: $taskName) { _ in
                 saveAction()
             }
             .background(Color.orange)

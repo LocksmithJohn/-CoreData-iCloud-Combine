@@ -28,5 +28,5 @@ struct IOS_CheckboxView: View {
 
 enum CheckboxSize: CGFloat {
     case small = 20
-    case big = 32
+    case big = 26
 }

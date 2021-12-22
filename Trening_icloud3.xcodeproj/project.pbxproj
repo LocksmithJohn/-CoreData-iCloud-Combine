@@ -56,6 +56,9 @@
 		CE52F13A275069AF00B1B461 /* StateTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52F138275069AF00B1B461 /* StateTypes.swift */; };
 		CE6068F0276E3FF200D4BF1A /* Haptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6068EF276E3FF200D4BF1A /* Haptic.swift */; };
 		CE6068F2276E6F0600D4BF1A /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6068F1276E6F0600D4BF1A /* Icon.swift */; };
+		CE6068F4276F7CAE00D4BF1A /* ProjectStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6068F3276F7CAE00D4BF1A /* ProjectStatus.swift */; };
+		CE6068F5276F7CAE00D4BF1A /* ProjectStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6068F3276F7CAE00D4BF1A /* ProjectStatus.swift */; };
+		CE6068F7276F8E3F00D4BF1A /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6068F6276F8E3F00D4BF1A /* StatusView.swift */; };
 		CE7057A526F15001001743DD /* MAC_ProjectDetailsScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7057A426F15001001743DD /* MAC_ProjectDetailsScreenViewModel.swift */; };
 		CEAEF17227653E5C00109F55 /* IOS_NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAEF17127653E5C00109F55 /* IOS_NewTaskView.swift */; };
 		CEAEF1762766198400109F55 /* FirstResponderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAEF1752766198400109F55 /* FirstResponderTextField.swift */; };
@@ -172,6 +175,8 @@
 		CE52F138275069AF00B1B461 /* StateTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateTypes.swift; sourceTree = "<group>"; };
 		CE6068EF276E3FF200D4BF1A /* Haptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptic.swift; sourceTree = "<group>"; };
 		CE6068F1276E6F0600D4BF1A /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Icon.swift; path = "../../../Library/Mobile Documents/com~apple~CloudDocs/Icon.swift"; sourceTree = "<group>"; };
+		CE6068F3276F7CAE00D4BF1A /* ProjectStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectStatus.swift; sourceTree = "<group>"; };
+		CE6068F6276F8E3F00D4BF1A /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		CE7057A426F15001001743DD /* MAC_ProjectDetailsScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MAC_ProjectDetailsScreenViewModel.swift; sourceTree = "<group>"; };
 		CEAEF17127653E5C00109F55 /* IOS_NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_NewTaskView.swift; sourceTree = "<group>"; };
 		CEAEF1752766198400109F55 /* FirstResponderTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstResponderTextField.swift; sourceTree = "<group>"; };
@@ -310,6 +315,7 @@
 				CE068B1726D5AE1300E82573 /* AppState+Downcasting.swift */,
 				CED0436526C93C8800B7D003 /* Strategy.swift */,
 				CED043A426C93CDA00B7D003 /* Models.swift */,
+				CE6068F3276F7CAE00D4BF1A /* ProjectStatus.swift */,
 				CE52F138275069AF00B1B461 /* StateTypes.swift */,
 				CE2E66E126C919E700AB6282 /* ContentView.swift */,
 				CEEB8FC127329B2B00F4E36A /* AccessibilityIdentifiers.swift */,
@@ -350,6 +356,7 @@
 				CEBD2E79275455C30016FCFD /* IOS_TaskAddView.swift */,
 				CEF74AB92760A5E600AC3943 /* BlurredView.swift */,
 				CED349E626E6162A00D5E9EE /* TextFieldBig.swift */,
+				CE6068F6276F8E3F00D4BF1A /* StatusView.swift */,
 				CEC4BC0926E6A13700692007 /* TextFieldSmall.swift */,
 				CEAEF1752766198400109F55 /* FirstResponderTextField.swift */,
 				CEAEF17727661B1C00109F55 /* FirstResponderTextView.swift */,
@@ -583,6 +590,7 @@
 				CED349E926E616F600D5E9EE /* TextEditor.swift in Sources */,
 				CEC4BC0E26E6CC7C00692007 /* Project_CD+CoreDataProperties.swift in Sources */,
 				CEBB6A1127616BFA005CD291 /* IOS_CustomTabbar.swift in Sources */,
+				CE6068F4276F7CAE00D4BF1A /* ProjectStatus.swift in Sources */,
 				CED0435D26C93C8300B7D003 /* NavigationController.swift in Sources */,
 				CEAEF17827661B1C00109F55 /* FirstResponderTextView.swift in Sources */,
 				CEBD2E80275462290016FCFD /* IOS_GeneralActionsView.swift in Sources */,
@@ -617,6 +625,7 @@
 				CE2E670D26C9B3CE00AB6282 /* InputInteractor.swift in Sources */,
 				CE068B0B26D589B300E82573 /* DateManager.swift in Sources */,
 				CED0434726C93C6300B7D003 /* CurrentValueSubject+Extensions.swift in Sources */,
+				CE6068F7276F8E3F00D4BF1A /* StatusView.swift in Sources */,
 				CED0436826C93C8800B7D003 /* Strategy.swift in Sources */,
 				CEBD2E7A275455C30016FCFD /* IOS_TaskAddView.swift in Sources */,
 				CED0437026C93C9000B7D003 /* StackAction.swift in Sources */,
@@ -661,6 +670,7 @@
 				CE068B1926D5AE1300E82573 /* AppState+Downcasting.swift in Sources */,
 				CE068B0926D587DE00E82573 /* Array+Extension.swift in Sources */,
 				CED043AC26C93CDB00B7D003 /* Models.swift in Sources */,
+				CE6068F5276F7CAE00D4BF1A /* ProjectStatus.swift in Sources */,
 				CE481D1026EABB1D001F838E /* Task_CD+CoreDataProperties.swift in Sources */,
 				CE068B0626D587A300E82573 /* EntityType.swift in Sources */,
 				CED043A126C93CB100B7D003 /* MAC_Router.swift in Sources */,

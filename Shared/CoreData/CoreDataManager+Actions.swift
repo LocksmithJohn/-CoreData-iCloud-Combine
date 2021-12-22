@@ -26,6 +26,7 @@ extension CoreDataManager {
         project_cd.name = project.name
         project_cd.projectDescription = project.description
         project_cd.id = project.id
+        project_cd.status = project.status.rawValue
         project.tasks.forEach {
             let task_cd = Task_CD(context: managedContext)
             task_cd.id = $0.id
@@ -74,6 +75,7 @@ extension CoreDataManager {
     func editProject(id: UUID,
                      newName: String? = nil,
                      newDescription: String? = nil,
+                     status: String? = nil,
                      newTasks: [Task]? = nil) {
         let request: NSFetchRequest<Project_CD> = Project_CD.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", id.uuidString)
@@ -84,6 +86,9 @@ extension CoreDataManager {
             }
             if let newDescription = newDescription {
                 project_cd.projectDescription = newDescription
+            }
+            if let status = status {
+                project_cd.status = status
             }
             if let newTasks = newTasks {
                 newTasks.forEach {
